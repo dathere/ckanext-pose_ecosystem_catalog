@@ -5,6 +5,7 @@ syntax: glob
 *.swo
 .DS_Store
 ckan.egg-info/*
+*.egg-info/*
 sandbox/*
 dist
 .mypy_cache
