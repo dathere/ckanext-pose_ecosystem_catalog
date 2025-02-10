@@ -10,6 +10,8 @@ sandbox/*
 dist
 .mypy_cache
 .eggs/*
+__pycache__/
+
 
 # pylons
 development.ini*
