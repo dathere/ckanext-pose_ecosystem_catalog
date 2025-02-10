@@ -1,6 +1,0 @@
-{% if pkg.type == 'showcase' %} 
-	{% include 'scheming/package/read_showcase.html'%} 
-{%else %} 
-	{% ckan_extends %} 
-	{{ super() }} 
-{% endif %}

@@ -1,9 +1,0 @@
-{% ckan_extends %}
-
-{% block contact_form_legend_content %}
-  {% if g.contact_form_legend_content %}
-    {{ h.render_markdown(g.contact_form_legend_content) }}
-  {% else %}
-    {{ _('Questions? Comments? We are always glad to hear from you!') }}
-  {% endif %}
-{% endblock %}

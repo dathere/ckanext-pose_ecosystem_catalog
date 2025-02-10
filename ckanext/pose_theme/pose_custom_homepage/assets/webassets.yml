@@ -1,8 +1,0 @@
-main-js:
-  filters: rjsmin
-  output: pose_custom_homepage/%(version)s_main.js
-  extra:
-    preload:
-      - base/main
-  contents:
-    - js/custom_homepage_form.js

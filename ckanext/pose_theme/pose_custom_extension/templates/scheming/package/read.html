@@ -1,6 +1,0 @@
-{% if pkg.type == 'extension' %} 
-	{% include 'scheming/package/read_extension.html'%} 
-{%else %} 
-	{% ckan_extends %} 
-	{{ super() }} 
-{% endif %}
