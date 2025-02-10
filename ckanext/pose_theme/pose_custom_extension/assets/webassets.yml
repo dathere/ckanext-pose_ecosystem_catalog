@@ -1,0 +1,33 @@
+ckeditor:
+  filter: rjsmin
+  output: extension/%(version)s_ckeditor.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - js/ckeditor.js
+    - js/extension-ckeditor.js
+
+ckanext-extension-css:
+  contents:
+    - ckanext_extension.css
+    - slick.css
+    - slick-theme.css
+  output: extension/%(version)s_ckanext_extension.css
+  filter: cssrewrite
+
+ckeditor-content-css:
+  contents:
+    - ckeditor-content-style.css
+  output: extension/%(version)s_ckeditor-content-style.css
+  filter: cssrewrite
+
+slick-js:
+  filter: rjsmin
+  output: extension/%(version)s_slick.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - js/slick.js
+    - js/slick-extension.js

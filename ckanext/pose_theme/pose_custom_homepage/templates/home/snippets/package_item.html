@@ -30,7 +30,7 @@ Example:
           <h3 class="dataset-heading">
             
             {% block heading_title %}
-              {{ h.link_to(h.truncate(title, truncate_title), package_url) }}
+              {{ h.link_to(title|truncate(truncate_title), package_url) }}
             {% endblock %}
             {% block heading_meta %}
               {% if package.get('state', '').startswith('draft') %}

@@ -1,0 +1,15 @@
+Metadata-Version: 1.1
+Name: ckanext-pose-ecosystem-catalog
+Version: 0.0.1
+Summary: Provide customers possibility to setup some CSS
+Home-page: https://github.com//ckanext-pose_ecosystem_catalog
+Author: Dathere
+Author-email: @.com
+License: AGPL
+Description: UNKNOWN
+Keywords: CKAN css theme
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.6

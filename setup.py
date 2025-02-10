@@ -5,9 +5,7 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-# Get the long description from the relevant file
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-    long_description = f.read()
+
 
 setup(
     name='''ckanext-pose_ecosystem_catalog''',
@@ -18,14 +16,13 @@ setup(
     version='0.0.1',
 
     description='''Provide customers possibility to setup some CSS''',
-    long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/dathere/ckanext-pose_ecosystem_catalog',
+    url='https://github.com//ckanext-pose_ecosystem_catalog',
 
     # Author details
     author='''Dathere''',
-    author_email='''dathere@dathere.com''',
+    author_email='''@.com''',
 
     # Choose your license
     license='AGPL',
@@ -86,7 +83,7 @@ setup(
         pose_custom_header=ckanext.pose_theme.pose_custom_header.plugin:PoseThemeHeaderPlugin
         pose_custom_footer=ckanext.pose_theme.pose_custom_footer.plugin:PoseThemeFooterPlugin
         pose_custom_showcase=ckanext.pose_theme.pose_custom_showcase.plugin:PoseShowcasePlugin
-
+ 
         pose_custom_heroslider=ckanext.pose_theme.pose_custom_heroslider.plugin:PoseHeroSliderPlugin
 
         pose_theme=ckanext.pose_theme.custom_themes.pose_theme.plugin:PoseThemePlugin

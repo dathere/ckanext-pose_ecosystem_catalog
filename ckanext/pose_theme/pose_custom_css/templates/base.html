@@ -4,6 +4,7 @@
     {{ super() }}
     {% set _type = 'asset' if h.version(h.ckan_version()) > h.version('2.9') else 'resource'  %}
     {% snippet 'snippets/pose_' ~ _type ~ '.html' %}
+    {% snippet 'showcase/snippets/slick_' ~ _type ~ '.html' %}
 {% endblock %}
 
 {% set custom_css = h.get_custom_css() %}

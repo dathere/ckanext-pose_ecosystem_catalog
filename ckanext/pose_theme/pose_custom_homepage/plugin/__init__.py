@@ -42,6 +42,8 @@ class PoseThemeHomepagePlugin(MixinPlugin):
         return {
             'pose_theme_get_dataset_count': helper.dataset_count,
             'pose_theme_get_showcases': helper.showcases,
+            'pose_theme_get_extensions': helper.extensions,
+            'pose_theme_get_sites': helper.sites,
             'pose_theme_get_story_banner': helper.get_story_banner,
             'pose_theme_get_showcases_story': helper.showcase_story,
             'pose_theme_get_value_from_extras': helper.get_value_from_extras,

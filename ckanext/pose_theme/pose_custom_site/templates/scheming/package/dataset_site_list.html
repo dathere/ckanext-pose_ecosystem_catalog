@@ -1,0 +1,25 @@
+{% extends "package/read_base.html" %}
+
+{% block subtitle %}{{ _('Sites') }} - {{ super() }}{% endblock %}
+
+{% block primary_content_inner %}
+    {% if h.check_access('ckanext_site_update') and c.site_dropdown %}
+        <form method="post" class="form-horizontal" id="site-add">
+            <select id="field-add_site" name="site_added" data-module="autocomplete">
+                {% for option in c.site_dropdown %}
+                    <option value="{{ option[0] }}"> {{ option[1] }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-primary" title="{{ _('Associate this site with this dataset') }}">{{ _('Add to site') }}</button>
+        </form>
+    {% endif %}
+
+    <h2>{% block page_heading %}{{ _('Sites featuring {dataset_name}').format(dataset_name=h.dataset_display_name(c.pkg_dict)) }}{% endblock %}</h2>
+    {% block site_list %}
+        {% if c.site_list %}
+            {% snippet "site/snippets/site_list.html", packages=c.site_list, pkg_id=c.pkg_dict.name, show_remove=h.check_access('ckanext_site_update') %}
+        {% else %}
+            <p class="empty">{{ _('There are no sites that feature this dataset') }}</p>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

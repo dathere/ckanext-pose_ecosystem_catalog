@@ -42,6 +42,29 @@ def showcases(num=24):
     return sorted_showcases[:num]
 
 
+def extensions(num=24):
+    """Return a list of extensions"""
+    sorted_extensions = []
+    try:
+        extensions = toolkit.get_action('ckanext_extensions_list')({}, {})
+        sorted_extensions = sorted(extensions, key=lambda k: k.get('metadata_modified'), reverse=True)
+    except Exception:
+        logger.debug("[pose_theme] Error getting extensions list")
+        return []
+    return sorted_extensions[:num]
+
+def sites(num=24):
+    """Return a list of sites"""
+    sorted_sites = []
+    try:
+        sites = toolkit.get_action('ckanext_sites_list')({}, {})
+        sorted_sites = sorted(sites, key=lambda k: k.get('metadata_modified'), reverse=True)
+    except Exception:
+        logger.debug("[pose_theme] Error getting sites list")
+        return []
+    return sorted_sites[:num]
+
+
 def groups(num=12):
     """Return a list of groups"""
     groups = []

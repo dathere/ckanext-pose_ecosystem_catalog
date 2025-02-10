@@ -1,0 +1,47 @@
+/* Custom style rules for ckanext-extension */
+
+.context-info .module-content .smallest {
+    font-size: 13px;
+}
+
+.context-info .module-content .info .btn {
+    margin-top: 18px;
+}
+
+
+.ckanext-extension-edit-wrapper {
+    background-image: none;
+}
+
+.ckanext-extension-image-container {
+    text-align: center;
+}
+
+.ckanext-extension-image {
+    margin-bottom: 25px;
+}
+
+.ckanext-extension-notes {
+    margin-bottom: 25px;
+}
+
+.ckanext-extension-launch {
+    margin-bottom: 25px;
+}
+
+
+td.ckanext_extension_pagination_footer {
+    padding: 0;
+}
+.ckanext_extension_pagination_footer .pagination {
+    margin: 0;
+    border-top: none 0;
+}
+
+.module-narrow .nav-item > a {
+    word-break: break-word;
+}
+
+.ck-editor__editable_inline {
+    min-height: 200px;
+}

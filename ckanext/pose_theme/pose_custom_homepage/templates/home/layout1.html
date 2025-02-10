@@ -7,7 +7,7 @@
 
   <div class="flex-container">
     {% block pose_theme_showcases %}
-    {% if 'showcase' in g.plugins %}
+    {% if 'pose_custom_showcase' in g.plugins %}
       {% if h.pose_theme_get_showcases() %}
         {% snippet 'home/snippets/showcases.html' %}
       {% endif %}
