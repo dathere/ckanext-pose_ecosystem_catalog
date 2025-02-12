@@ -38,13 +38,18 @@ dataset_fields:
   form_placeholder: eg. economy, mental health, government
 
 
-- field_name: data_contact_email
-  label: Contact Email
-  form_placeholder: joe@example.com
+- field_name: contact_name
+  label: Maintainer Name
+  form_placeholder: Enter the maintainer name
+  validators: ignore_missing
   required: True
-  display_snippet: email.html
-  form_placeholder: Professional email for application questions or concerns.
+  help_text: Point of contact name for data steward.
 
+- field_name: contact_email
+  label: Maintainer Email
+  form_placeholder: Enter the maintainer email
+  validators: ignore_missing
+  help_text: Point of contact email for data steward.
 
 - field_name: detailed_info
   label: Detailed Description
