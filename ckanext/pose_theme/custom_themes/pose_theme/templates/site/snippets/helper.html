@@ -1,0 +1,19 @@
+{% set ckan_29_or_higher = h.ckan_version().split('.')[1] | int >= 9 %}
+{% set site_admins_route = 'site_blueprint.admins' if ckan_29_or_higher else 'site_admins' %}
+
+<div class="module module-narrow module-shallow">
+  <h2 class="module-heading">
+    <i class="fa fa-info-circle icon-info-sign"></i>
+    {{ _('What are Sites?') }}
+  </h2>
+  <div class="module-content">
+    <p>
+      {% trans %}Datasets have been used to build apps, websites and visualizations. They've been featured in articles, and written about in news reports and blog posts. Sites collect together the best examples of datasets in use, to provide further insight, ideas, and inspiration.{% endtrans %}
+    </p>
+    {% if h.check_access('ckanext_site_admin_add') %}
+      <p>
+        {% trans url=h.url_for(site_admins_route) %}Sysadmins can manage Site Admins from the <a href='{{ url }}'>Site configuration page</a>.{% endtrans %}
+      </p>
+    {% endif %}
+  </div>
+</div>

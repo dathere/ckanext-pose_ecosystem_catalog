@@ -1,0 +1,6 @@
+{% if pkg.type == 'site' %} 
+	{% include 'scheming/package/read_site.html'%} 
+{%else %} 
+	{% ckan_extends %} 
+	{{ super() }} 
+{% endif %}

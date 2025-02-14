@@ -2,18 +2,13 @@
   <div class="module-content">
     <div class="container">
         <div class="showcase-content">
-          <h4 class="heading-explanation above-heading">
-            Browse our showcases
-          </h4>
           <h2 class="heading">
             <a href="/showcase">
               {{ h.pose_theme_get_custom_name('showcases-custom-name',
               'Showcases') }}
             </a>
           </h2>
-          <p>
-            Applications built by using data to tell a story or provide additional context for a user.
-          </p>
+         
         </div>
 
         <section id="recent-list" class="showcases">
@@ -21,7 +16,7 @@
           showcases=h.pose_theme_get_showcases() %}
         </section>
         <div class="d-flex justify-content-center">
-          <a href="/showcase" class="btn btn-primary-dark">View All Showcases</a>
+          <a href="/showcase" class="btn btn-primary">View All Showcases</a>
         </div>
       </div>
     </div>

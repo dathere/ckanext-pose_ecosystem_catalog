@@ -14,6 +14,17 @@ class ShowcasesNaming(AbstractParser):
     title = "Showcases Section Title"
     _default_value = "Showcases"
 
+class ExtensionsNaming(AbstractParser):
+    form_name = "extensions-custom-name"
+    title = "Extensions Section Title"
+    _default_value = "Extensions"
+
+
+class SitesNaming(AbstractParser):
+    form_name = "sites-custom-name"
+    title = "Sites Section Title"
+    _default_value = "Sites"
+
 
 class PopularDatasetsNaming(AbstractParser):
     form_name = "popular-datasets-custom-name"
@@ -34,10 +45,14 @@ class CustomNamingProcessor:
         self.showcases = ShowcasesNaming()
         self.popular_datasets = PopularDatasetsNaming()
         self.recent_datasets = RecentDatasetsNaming()
+        self.extensions = ExtensionsNaming()
+        self.sites = SitesNaming()
 
         self.naming_processors = (
             self.groups,
             self.showcases,
+            self.extensions,
+            self.sites,
             self.popular_datasets,
             self.recent_datasets
         )

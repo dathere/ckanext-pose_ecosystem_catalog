@@ -1,0 +1,199 @@
+scheming_version: 3
+dataset_type: extension
+about_url: https://pose.com/extensions
+
+dataset_fields:
+
+- field_name: title
+  label: Title
+  preset: title
+  form_placeholder: eg. A Descriptive Title
+
+- field_name: name
+  label: URL
+  preset: dataset_slug
+  form_placeholder: eg. a-descriptive-title
+
+- field_name: owner_org
+  label: Organization
+  required: True
+  preset: dataset_organization
+
+- field_name: notes
+  label: Description
+  required: True
+  form_snippet: markdown.html
+  form_placeholder: eg. Some useful notes about the data
+
+# - field_name: group
+#   label: Categories
+#   preset: multiple_checkbox
+#   choices_helper: scheming_groups_choices
+#   required: False
+#   help_text: Broad categories these data fall within. For data curation purposes, users should be a member of the category to add a dataset to the category.
+
+- field_name: tag_string
+  label: Tags
+  preset: tag_string_autocomplete
+  form_placeholder: eg. economy, mental health, government
+
+
+- field_name: data_contact_email
+  label: Contact Email
+  form_placeholder: joe@example.com
+  required: True
+  display_snippet: email.html
+  form_placeholder: Professional email for application questions or concerns.
+
+
+- field_name: detailed_info
+  label: Detailed Description
+  validators: ignore_missing
+  preset: markdown
+  form_placeholder: Provide a comprehensive description of the extension and its functionality
+  help_text: Elaborate on the extension's features, use cases, and technical details
+
+- field_name: url
+  label: GitHub Repository URL
+  validators: url_validator ignore_missing
+  form_placeholder: Enter the GitHub repository URL
+  help_text: Link to the extension's GitHub repository
+
+- field_name: extension_type
+  label: Extension Type
+  preset: select
+  required: true
+  choices:
+    - value: theme
+      label: Theme
+    - value: dataset_type
+      label: Dataset Type
+    - value: harvester
+      label: Harvester
+    - value: visualization
+      label: Visualization
+    - value: data_utility
+      label: Data Utility
+    - value: other
+      label: Other
+  help_text: Classification of the extension's primary purpose
+
+- field_name: is_archived
+  label: Is Archived
+  preset: select
+  choices:
+    - value: true
+      label: Yes
+    - value: false
+      label: No
+  help_text: Indicates whether the extension repository is archived
+
+- field_name: archive_reason
+  label: Archive Reason
+  validators: ignore_missing
+  form_placeholder: Reason for archiving the repository
+  help_text: Explanation for why the repository has been archived
+
+- field_name: organization_url
+  label: Organization URL
+  validators: url_validator ignore_missing
+  form_placeholder: Enter the organization's URL
+  help_text: Website or profile of the organization maintaining the extension
+
+- field_name: language_stats
+  label: Language Statistics
+  form_placeholder: Programming languages used in the extension
+  help_text: Breakdown of programming languages used in the repository
+
+- field_name: repository_size
+  label: Repository Size
+  validators: int_validator ignore_missing
+  form_placeholder: Repository size in kilobytes
+  help_text: Size of the repository in kilobytes
+
+- field_name: forks_count
+  label: Number of Forks
+  validators: int_validator ignore_missing
+  form_placeholder: Enter the number of repository forks
+  help_text: Total number of times the repository has been forked
+
+- field_name: total_releases
+  label: Total Releases
+  validators: int_validator ignore_missing
+  form_placeholder: Number of releases
+  help_text: Total number of software releases for this extension
+
+- field_name: latest_release
+  label: Latest Release Version
+  form_placeholder: Latest version number
+  help_text: The most recent version of the extension
+
+- field_name: release_date
+  label: Latest Release Date
+  preset: date
+  validators: ignore_missing
+  form_placeholder: Date of the latest release
+  help_text: The date of the most recent software release
+
+- field_name: ckan_version
+  label: CKAN Version Requirement
+  form_placeholder: Compatible CKAN versions
+  help_text: Versions of CKAN this extension supports
+
+- field_name: stars
+  label: GitHub Stars
+  validators: int_validator ignore_missing
+  form_placeholder: Number of GitHub stars
+  help_text: Number of stars the repository has received on GitHub
+
+- field_name: last_update
+  label: Last Repository Update
+  preset: datetime
+  validators: ignore_missing
+  form_placeholder: Date of last repository update
+  help_text: The most recent date the repository was updated
+
+- field_name: last_commit
+  label: Last Commit
+  form_placeholder: SHA of the last commit
+  validators: ignore_missing
+  help_text: Unique identifier of the most recent commit
+
+- field_name: open_issues
+  label: Open Issues
+  validators: int_validator ignore_missing
+  form_placeholder: Number of open issues
+  help_text: Current number of open issues in the repository
+
+- field_name: contributors_count
+  label: Number of Contributors
+  validators: int_validator ignore_missing
+  form_placeholder: Total number of contributors
+  help_text: Total unique contributors to the repository
+
+- field_name: contributors
+  label: Contributors
+  preset: multiple_text
+  help_text: List of contributors to the extension
+
+- field_name: contributor_details
+  label: Contributor Details
+  form_snippet: markdown.html
+  validators: ignore_missing
+  help_text: Additional information about contributors and their contributions
+
+resource_fields:
+
+- field_name: url
+  label: Screenshot
+  preset: resource_url_upload
+  form_placeholder: http://example.com/my-application-screenshot.jpg
+  upload_label: Photo
+
+- field_name: name
+  label: Caption
+  validators: ignore_missing
+  form_placeholder: eg. Description of application screenshot
+
+
+  

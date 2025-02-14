@@ -1,18 +1,16 @@
 main-js:
   filters: rjsmin
-  output: pose_theme/%(version)s_main.js
+  output: pose_theme/assets_main.js
   extra:
     preload:
       - base/main
   contents:
     - vendor/spectrum/js/spectrum.js
     - js/color_picker.js
-    - js/slick.js
-    - js/slick.build.js
+
 
 main-css:
-  output:  pose_theme/%(version)s_main.css
-  filters: cssrewrite
+  output:  pose_theme/assets_main.css
   contents:
     - vendor/spectrum/css/spectrum.css
     - css/theme.css

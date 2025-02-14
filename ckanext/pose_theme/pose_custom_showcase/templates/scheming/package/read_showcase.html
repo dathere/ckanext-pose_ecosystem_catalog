@@ -68,14 +68,17 @@
             {% endblock %}
         </h1>
           {% set image_url = h.get_value_from_showcase_extras(pkg.extras, 'image_url') %}
+          {% if not image_url %}
+            {% set image_url = pkg.resources[0].url if pkg.resources else None %}
+          {% endif %}
           <p class="ckanext-showcase-image-container">
             {% if pkg.url %}
-              <a class="ckanext-showcase-launch" href="{{ pkg.url }}" target="_blank">
-                <img src="/uploads/showcase/{{ image_url }}" alt="{{ name }}" class="media-image ckanext-showcase-image img-responsive">
+            <a class="ckanext-showcase-launch" href="{{pkg.url}}" target="_blank">
+              <img src="{{h.url_for_static_or_external(image_url)}}" alt="{{ name }}" class="media-image ckanext-showcase-image img-responsive">
               </a>
             {% else %}
-              <img src="/uploads/showcase/{{image_url }}" alt="{{ name }}" class="media-image ckanext-showcase-image img-responsive">
-            {% endif %}
+            <img src="{{h.url_for_static_or_external(image_url)}}" alt="{{ name }}" class="media-image ckanext-showcase-image img-responsive">           
+             {% endif %}
           </p>
     {% block package_notes %}
       {% if pkg.notes and editor == 'ckeditor' %}

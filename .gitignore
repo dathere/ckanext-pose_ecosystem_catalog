@@ -4,12 +4,14 @@ syntax: glob
 *.swp
 *.swo
 .DS_Store
-ckan.egg-info/*
+*.egg-info/*
 *.egg-info/*
 sandbox/*
 dist
 .mypy_cache
 .eggs/*
+__pycache__/
+
 
 # pylons
 development.ini*

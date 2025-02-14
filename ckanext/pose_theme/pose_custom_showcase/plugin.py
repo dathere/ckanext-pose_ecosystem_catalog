@@ -48,6 +48,7 @@ class PoseShowcasePlugin(plugins.SingletonPlugin, lb.DefaultDatasetForm):
             "get_value_from_showcase_extras": showcase_helpers.get_value_from_showcase_extras,
             "scheming_groups_choices": showcase_helpers.scheming_groups_choices,
             "get_package_dict": showcase_helpers.get_package_dict,
+            "get_image_url": showcase_helpers.get_image_url,
         }
 
     # IFacets

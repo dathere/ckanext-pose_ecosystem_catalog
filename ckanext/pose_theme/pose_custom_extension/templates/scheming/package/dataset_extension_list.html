@@ -1,0 +1,25 @@
+{% extends "package/read_base.html" %}
+
+{% block subtitle %}{{ _('Extensions') }} - {{ super() }}{% endblock %}
+
+{% block primary_content_inner %}
+    {% if h.check_access('ckanext_extension_update') and c.extension_dropdown %}
+        <form method="post" class="form-horizontal" id="extension-add">
+            <select id="field-add_extension" name="extension_added" data-module="autocomplete">
+                {% for option in c.extension_dropdown %}
+                    <option value="{{ option[0] }}"> {{ option[1] }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-primary" title="{{ _('Associate this extension with this dataset') }}">{{ _('Add to extension') }}</button>
+        </form>
+    {% endif %}
+
+    <h2>{% block page_heading %}{{ _('Extensions featuring {dataset_name}').format(dataset_name=h.dataset_display_name(c.pkg_dict)) }}{% endblock %}</h2>
+    {% block extension_list %}
+        {% if c.extension_list %}
+            {% snippet "extension/snippets/extension_list.html", packages=c.extension_list, pkg_id=c.pkg_dict.name, show_remove=h.check_access('ckanext_extension_update') %}
+        {% else %}
+            <p class="empty">{{ _('There are no extensions that feature this dataset') }}</p>
+        {% endif %}
+    {% endblock %}
+{% endblock %}
