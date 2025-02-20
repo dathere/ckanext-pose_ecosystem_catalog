@@ -62,9 +62,9 @@
             {% endblock %}
         </h1>
         {% block package_notes %}
-        {% if pkg.notes %}
+        {% if pkg.detailed_info %}
           <div class="notes embedded-content ckanext-extension-notes">
-            {{ pkg.notes }}
+            {{ pkg.detailed_info }}
           </div>
         {% endif %}
       {% endblock %}
