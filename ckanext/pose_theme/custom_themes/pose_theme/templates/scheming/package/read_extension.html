@@ -64,7 +64,7 @@
         {% block package_notes %}
         {% if pkg.detailed_info %}
           <div class="notes embedded-content ckanext-extension-notes">
-            {{ pkg.detailed_info }}
+            {{ h.render_markdown(pkg.detailed_info) }}
           </div>
         {% endif %}
       {% endblock %}
