@@ -4,13 +4,13 @@
   <ul>
     {% block stats_group %}
     <li class="statdatasets">
-        <p class="statistic_value">{{ h.SI_number_span(stats.dataset_count) }}</p>
-        <p class="statistic_name">{{ _('Extension') if stats.dataset_count == 1 else _('Extensions')| capitalize }}  </p>
+        <p class="statistic_value">{{ h.SI_number_span(stats.extension_count) }}</p>
+        <p class="statistic_name">{{ _('Extension') if stats.extension == 1 else _('Extensions')| capitalize }}  </p>
         <div class="backgroundstats">&nbsp;</div>
     </li>
     <li class="statorg">
-      <p class="statistic_value">{{ h.SI_number_span(stats.organization_count) }}</p>
-      <p class="statistic_name">{{ _('Site') if stats.organization_count == 1 else _('Sites')| capitalize }}</p>
+      <p class="statistic_value">{{ h.SI_number_span(stats.site_count) }}</p>
+      <p class="statistic_name">{{ _('Site') if stats.site_count == 1 else _('Sites')| capitalize }}</p>
       <div class="backgroundstats">&nbsp;</div>
     </li>
     <!-- <li class="statorg">

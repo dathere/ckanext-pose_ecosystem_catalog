@@ -1,67 +1,208 @@
 scheming_version: 3
 dataset_type: site
-about_url: https://pose.com/site
+about: "Schema for describing CKAN instances with extended metadata"
+about_url: "https://github.com/ckan/ckanext-scheming"
 
 dataset_fields:
 
 - field_name: title
-  label: Title
+  label: Site Name
   preset: title
-  form_placeholder: eg. A Descriptive Title
+  required: true
+  help_text: The name of your CKAN site.
 
 - field_name: name
   label: URL
   preset: dataset_slug
-  form_placeholder: eg. a-descriptive-title
 
-- field_name: owner_org
-  label: Organization
-  required: True
-  preset: dataset_organization
+
+- field_name: url
+  label: Site URL
+  validators: url_validator ignore_missing
+  form_placeholder: Enter the URL of your CKAN site
+  help_text: The URL of your CKAN site.
+
+- field_name: public_site
+  label: Public Site
+  preset: select
+  validators: ignore_missing
+  choices:
+    - label: "Yes - Publicly available"
+      value: "true"
+    - label: "No - Not publicly available"
+      value: "false"
+  help_text: Indicate if the site is publicly available.
 
 - field_name: notes
   label: Description
-  required: True
   form_snippet: markdown.html
-  form_placeholder: eg. Some useful notes about the data
+  required: true
+  help_text: Tell us about your CKAN site, its purpose, and what kind of data it hosts.
 
-# - field_name: group
-#   label: Categories
-#   preset: multiple_checkbox
-#   choices_helper: scheming_groups_choices
-#   required: False
-#   help_text: Broad categories these data fall within. For data curation purposes, users should be a member of the category to add a dataset to the category.
+- field_name: location
+  label: Location
+  required: false
+  help_text: "e.g. 'Uruguay', 'Queensland, Australia', 'Hamburg, Germany'. Leave blank if your site has global scope or location does not apply."
+
+- field_name: region
+  label: Region
+  preset: select
+  validators: ignore_missing
+  choices:
+    - label: "None"
+      value: "none"
+    - label: "Europe"
+      value: "europe"
+    - label: "Asia"
+      value: "asia"
+    - label: "Africa"
+      value: "africa"
+    - label: "South America"
+      value: "south_america"
+    - label: "North America"
+      value: "north_america"
+    - label: "Australasia"
+      value: "australasia"
+    - label: "Worldwide"
+      value: "worldwide"
+  help_text: "What region does your instance belong to? Choose 'Worldwide' for global sites or 'None' if it does not apply."
+
+- field_name: site_type
+  label: Type
+  preset: select
+  validators: ignore_missing
+  choices:
+    - label: "Community"
+      value: "community"
+    - label: "National Government"
+      value: "national_government"
+    - label: "Local / Regional Government"
+      value: "local_regional_government"
+    - label: "Academic"
+      value: "academic"
+    - label: "Other Organizations"
+      value: "other_organizations"
+  help_text: "The type of organization running the CKAN instance."
+
+- field_name: status
+  label: Status
+  preset: select
+  validators: ignore_missing
+  choices:
+    - label: "Production"
+      value: "production"
+    - label: "Staging"
+      value: "staging"
+    - label: "Development"
+      value: "development"
+  help_text: "The current status of your CKAN site."
+
+- field_name: publication_date
+  label: Publication Date
+  preset: date
+  validators: ignore_missing
+  help_text: "When did (or will) your CKAN site go live"
+
+# Technical Details
+- field_name: git_repo
+  label: Git Repository
+  validators: url_validator ignore_missing
+  validators: ignore_missing
+  help_text: "Link to a public repository with your site customizations."
+
+- field_name: ckan_version
+  label: CKAN Version
+  required: true
+  help_text: "The version of CKAN you are running."
+
+# Frontend CMS
+- field_name: frontend_cms
+  label: Frontend CMS
+  preset: select
+  validators: ignore_missing
+  choices:
+    - label: "None"
+      value: "none"
+    - label: "Drupal"
+      value: "drupal"
+    - label: "Wordpress"
+      value: "wordpress"
+    - label: "Other"
+      value: "other"
+  help_text: "Are you using another CMS as frontend for your site or using it alongside CKAN?"
+
+- field_name: other_frontend_cms
+  label: Other Frontend CMS
+  required: false
+  help_text: "If you selected 'Other' for the frontend CMS, please specify which one you're using."
+
+
+
+- field_name: extensions
+  label: Extensions
+  validators: ignore_missing
+  help_text: "List any extensions you're using."
+
+
+- field_name: contact_email
+  label: Maintainer Email
+  form_placeholder: Enter the maintainer email
+  validators: ignore_missing
+  help_text: Maintainer email for the site.
 
 - field_name: tag_string
   label: Tags
   preset: tag_string_autocomplete
   form_placeholder: eg. economy, mental health, government
+  
+- field_name: license_id
+  label: License ID
+  form_snippet: license.html
+  validators: ignore_missing
+  help_text: "The license ID under which the dataset is released"
+  
+  
+- field_name: language
+  label: Language
+  preset: select
+  validators: ignore_missing
+  choices:
+    - label: "English"
+      value: "en"
+    - label: "French"
+      value: "fr"
+    - label: "Spanish"
+      value: "es"
+    - label: "German"
+      value: "de"
+    - label: "Other"
+      value: "other"
+  help_text: "Primary language of the dataset"
+  
+- field_name: other_language
+  label: Other Language
+  required: false
+  help_text: "If you selected 'Other' for language, please specify which language(s)"
 
-- field_name: url
-  label: External Link
-  form_placeholder: eg. http://example.com
-  required: True
-
-- field_name: data_contact_email
-  label: Contact Email
-  form_placeholder: joe@example.com
-  required: True
-  display_snippet: email.html
-  form_placeholder: Professional email for application questions or concerns.
-
-- field_name: related_datasets
-  label: Related Datasets
-  preset: multiple_text
 
 resource_fields:
-
 - field_name: url
-  label: Screenshot
+  label: URL
   preset: resource_url_upload
-  form_placeholder: http://example.com/my-application-screenshot.jpg
-  upload_label: Photo
+  validators: ignore_missing
 
 - field_name: name
-  label: Caption
+  label: Name
   validators: ignore_missing
-  form_placeholder: eg. Description of application screenshot
+  validators: ignore_missing
+
+
+- field_name: description
+  label: Description
+  form_snippet: markdown.html
+  required: false
+
+- field_name: format
+  label: Format
+  preset: resource_format_autocomplete
+  validators: ignore_missing

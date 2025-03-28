@@ -1,0 +1,60 @@
+{#
+    Renders a media item for a organization. This should be used in a list.
+    
+    organization - A organization dict.
+    
+    Example:
+    
+        <ul class="media-grid">
+          {% for organization in organizations %}
+            {% snippet "organization/snippets/organization_item.html", organization=organization %}
+          {% endfor %}
+        </ul>
+    #}
+    {% set stats = h.get_site_statistics() %}
+    {% set url = h.url_for(organization.type ~ '.read', id=organization.name) %}
+    {% block item %}
+    <li class="media-item">
+      {% block item_inner %}
+      {% block image %}
+        <img src="{{ organization.image_display_url or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ organization.name }}" class="img-fluid media-image">
+      {% endblock %}
+      {% block title %}
+        <h2 class="media-heading">{{ organization.display_name }}</h2>
+      {% endblock %}
+      {% block description %}
+        {% if organization.description %}
+          <p class="media-description">{{ h.markdown_extract(organization.description, extract_length=80) }}</p>
+        {% endif %}
+      {% endblock %}
+      {% block datasets %}
+        {% if stats.dataset_count > 0 %}
+          <strong class="count">{{ ungettext('{num} Dataset', '{num} Datasets', stats.dataset_count).format(num=stats.dataset_count) }}</strong><br/>
+          {% endif %}
+        {% if stats.extension_count %}
+          <strong class="count">{{ ungettext('{num} Extension', '{num} Extensions', stats.extension_count).format(num=stats.extension_count) }}</strong><br/>
+          {% endif %}
+
+        {% if stats.site_count %}
+            <strong class="count">{{ ungettext('{num} Site', '{num} Sites', stats.site_count).format(num=stats.site_count) }}</strong><br/>
+        {% endif %}
+
+
+      {% endblock %}
+      {% block capacity %}
+        {% if show_capacity and organization.capacity %}
+        <p><span class="label label-default">{{ h.roles_translated().get(organization.capacity, organization.capacity) }}</span></p>
+        {% endif %}
+      {% endblock %}
+      {% block link %}
+      {% set view_label = _('Open details page for {name}').format(name=organization.display_name) %}
+      <a href="{{ url }}" aria-label="{{ view_label }}" data-bs-title="{{ view_label }}" data-bs-toggle="tooltip" class="media-view">
+        <span>{{ _('View {organization_name}').format(organization_name=organization.display_name) }}</span>
+      </a>
+      {% endblock %}
+      {% endblock %}
+    </li>
+    {% endblock %}
+    {% if position is divisibleby 3 %}
+      <li class="clearfix js-hide"></li>
+    {% endif %}

@@ -20,20 +20,24 @@ def facet_remove_field(key, value=None, replace=None):
 def get_site_statistics():
     """
     Custom stats helper, so we can get the correct number of packages, and a
-    count of showcases.
+    count of extensions.
     """
 
     stats = {}
-    stats["showcase_count"] = tk.get_action("package_search")(
-        {}, {"rows": 1, "fq": "+dataset_type:showcase"}
+    stats["extension_count"] = tk.get_action("package_search")(
+        {}, {"rows": 1, "fq": "+dataset_type:extension"}
+    )["count"]
+    stats["site_count"] = tk.get_action("package_search")(
+        {}, {"rows": 1, "fq": "+dataset_type:site"}
     )["count"]
     stats["dataset_count"] = tk.get_action("package_search")(
-        {}, {"rows": 1, "fq": "!dataset_type:showcase"}
+        {}, {"rows": 1, "fq": "+dataset_type:dataset"}
     )["count"]
     stats["group_count"] = len(tk.get_action("group_list")({}, {}))
     stats["organization_count"] = len(tk.get_action("organization_list")({}, {}))
 
     return stats
+
 
 
 def get_wysiwyg_editor():

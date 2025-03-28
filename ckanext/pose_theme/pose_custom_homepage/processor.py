@@ -68,4 +68,4 @@ class CustomNamingProcessor:
         return result
 
 
-custom_naming_processor = CustomNamingProcessor()
+custom_naming_processor = CustomNamingProcessor() 

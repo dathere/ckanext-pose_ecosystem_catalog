@@ -9,7 +9,7 @@ class PoseThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IBlueprint)
 
-    # IConfigurer
+    # IConfigurer   
     def update_config(self, ckan_config):
         toolkit.add_template_directory(ckan_config, 'templates')
         toolkit.add_public_directory(ckan_config, 'public')
