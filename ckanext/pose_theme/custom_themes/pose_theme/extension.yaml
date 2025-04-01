@@ -219,6 +219,7 @@ resource_fields:
 - field_name: url
   label: Screenshot
   preset: resource_url_upload
+  validators: ignore_missing
   form_placeholder: http://example.com/my-application-screenshot.jpg
   upload_label: Photo
 

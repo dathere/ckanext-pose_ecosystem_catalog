@@ -15,6 +15,10 @@ dataset_fields:
   label: URL
   preset: dataset_slug
 
+- field_name: owner_org
+  label: Organization
+  required: false
+  preset: dataset_organization
 
 - field_name: url
   label: Site URL
@@ -187,22 +191,14 @@ dataset_fields:
 
 resource_fields:
 - field_name: url
-  label: URL
+  label: Screenshot
   preset: resource_url_upload
   validators: ignore_missing
+  form_placeholder: http://example.com/my-application-screenshot.jpg
+  upload_label: Photo
 
 - field_name: name
-  label: Name
+  label: Caption
   validators: ignore_missing
-  validators: ignore_missing
-
-
-- field_name: description
-  label: Description
-  form_snippet: markdown.html
+  form_placeholder: eg. Description of application screenshot
   required: false
-
-- field_name: format
-  label: Format
-  preset: resource_format_autocomplete
-  validators: ignore_missing

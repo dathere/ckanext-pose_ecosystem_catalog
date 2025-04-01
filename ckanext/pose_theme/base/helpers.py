@@ -316,7 +316,7 @@ def get_default_extent():
 
 
 def get_column_count():
-    return int(config.get('ckanext.pose_theme.column_count', 3))
+    return int(config.get('ckanext.pose_theme.column_count', 4))
 
 
 def is_activity_enabled():
