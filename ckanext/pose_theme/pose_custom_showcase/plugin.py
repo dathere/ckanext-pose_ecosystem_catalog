@@ -66,15 +66,10 @@ class PoseShowcasePlugin(plugins.SingletonPlugin, lb.DefaultDatasetForm):
                 {"fq": "+dataset_type:dataset {}".format(search_params.get("fq"))}
             )
 
-        if tk.request and tk.request.path[0:6] == "/group":
-            search_params.update(
-                {"fq": "+dataset_type:dataset {}".format(search_params.get("fq"))}
-            )
-
         return search_params
 
     # IActions
     def get_actions(self):
         return {
             "ckanext_showcase_list": actions.showcase_list,
-        }
+        } 

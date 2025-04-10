@@ -65,11 +65,6 @@ class PoseExtensionPlugin(plugins.SingletonPlugin, lb.DefaultDatasetForm):
                 {"fq": "+dataset_type:dataset {}".format(search_params.get("fq"))}
             )
 
-        if tk.request and tk.request.path[0:6] == "/group":
-            search_params.update(
-                {"fq": "+dataset_type:dataset {}".format(search_params.get("fq"))}
-            )
-
         return search_params
 
     # IActions

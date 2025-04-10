@@ -3,10 +3,13 @@
 {% set pkg = pkg_dict or c.pkg_dict %}
 {% set name = pkg.title or pkg.name %}
 {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
+{% set default_group_type = h.default_group_type('group') %}
+{% set site_search_route = 'site.search' %}
 
 
 {% block subtitle %}{{ pkg.title or pkg.name }} - {{ _('Sites') }}{% endblock %}
-
+{% set site_index_route = 'site_blueprint.index' if ckan_29_or_higher else 'site_index' %}
+{% set site_new_route = 'site_blueprint.new' if ckan_29_or_higher else 'site_new' %}
 
 
 
@@ -30,7 +33,7 @@
 
 {% block breadcrumb_content %}
     {% set site = pkg.title or pkg.name %}
-    <li>{{ h.nav_link(_('Sites'), named_route=pkg.type+'.read', id=pkg.name, package_type=pkg.type) }}</li>
+    <li>{% link_for _('Sites'), named_route=site_search_route %}</li>
     <li{{ self.breadcrumb_content_selected() }}>{% link_for site|truncate(30), named_route=pkg.type+'.edit', id=pkg.name %}</li>
 {% endblock %}
 
@@ -41,11 +44,15 @@
 {% endblock %}
 
 {% block primary_content_inner %}
-    {% if h.check_access('package_update', {'id':pkg.id }) %}
-        <div class="actions">
+    <div class="actions">
+        {% if pkg.url %}
+            <a class="btn btn-primary ckanext-extension-launch" href="{{ pkg.url }}" target="_blank"><i class="fa fa-external-link icon-external-link"></i> {{ _('Visit') }}</a>
+        {% endif %}
+        {% if h.check_access('package_update', {'id':pkg.id }) %}
             {% link_for _('Manage'), named_route=pkg.type+'.edit', id=pkg.name, package_type=pkg.type, class_='btn btn-default', icon='wrench' %}
-        </div>
-    {% endif %}
+            {{ h.build_nav_icon(pkg.type ~ '.groups', h.humanize_entity_type('group', default_group_type, 'content tab') or _('Groups'), id=pkg.name, icon='users', class_='btn btn-default') }}
+        {% endif %}
+    </div>
     {% block package_description %}
         {% if pkg.private %}
             <span class="dataset-private label label-inverse pull-right">
