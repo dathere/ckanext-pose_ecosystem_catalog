@@ -53,39 +53,65 @@ dataset_fields:
   preset: select
   validators: ignore_missing
   choices:
-    - label: "None"
-      value: "none"
-    - label: "Europe"
-      value: "europe"
-    - label: "Asia"
-      value: "asia"
-    - label: "Africa"
-      value: "africa"
-    - label: "South America"
-      value: "south_america"
     - label: "North America"
-      value: "north_america"
-    - label: "Australasia"
-      value: "australasia"
-    - label: "Worldwide"
-      value: "worldwide"
-  help_text: "What region does your instance belong to? Choose 'Worldwide' for global sites or 'None' if it does not apply."
+      value: "North America"
+    - label: "South America"
+      value: "South America"
+    - label: "Southern Africa"
+      value: "Southern Africa"
+    - label: "Europe"
+      value: "Europe"
+    - label: "Southeast Asia"
+      value: "Southeast Asia"
+    - label: "East Asia"
+      value: "East Asia"
+    - label: "South Asia"
+      value: "South Asia"
+    - label: "North Africa"
+      value: "North Africa"
+    - label: "Middle East"
+      value: "Middle East"
+    - label: "Oceania"
+      value: "Oceania"
+    - label: "Central Asia"
+      value: "Central Asia"
+    - label: "Caribbean"
+      value: "Caribbean"
+    - label: "East Africa"
+      value: "East Africa"
+    - label: "Central America"
+      value: "Central America"
+  help_text: "What region does your instance belong to?"
+
+- field_name: latitude
+  label: Latitude
+  validators: ignore_missing number_validator
+  form_placeholder: "e.g. 51.5074"
+  help_text: "The latitude coordinate of your location in decimal degrees (e.g. 51.5074 for London)"
+
+- field_name: longitude
+  label: Longitude
+  validators: ignore_missing number_validator
+  form_placeholder: "e.g. -0.1278"
+  help_text: "The longitude coordinate of your location in decimal degrees (e.g. -0.1278 for London)"
 
 - field_name: site_type
   label: Type
   preset: select
   validators: ignore_missing
   choices:
-    - label: "Community"
-      value: "community"
-    - label: "National Government"
-      value: "national_government"
-    - label: "Local / Regional Government"
-      value: "local_regional_government"
-    - label: "Academic"
-      value: "academic"
-    - label: "Other Organizations"
-      value: "other_organizations"
+    - label: "Commercial"
+      value: "Commercial"
+    - label: "Educational"
+      value: "Educational"
+    - label: "Government"
+      value: "Government"
+    - label: "Non-profit"
+      value: "Non_profit"
+    - label: "Research"
+      value: "Research"
+    - label: "Unknown"
+      value: "Unknown"
   help_text: "The type of organization running the CKAN instance."
 
 - field_name: status
@@ -119,34 +145,36 @@ dataset_fields:
   required: true
   help_text: "The version of CKAN you are running."
 
-# Frontend CMS
 - field_name: frontend_cms
   label: Frontend CMS
   preset: select
   validators: ignore_missing
   choices:
-    - label: "None"
-      value: "none"
+    - label: "CKAN Default"
+      value: "ckan_default"
+    - label: "PortalJS"
+      value: "portaljs"
     - label: "Drupal"
       value: "drupal"
-    - label: "Wordpress"
+    - label: "WordPress"
       value: "wordpress"
-    - label: "Other"
-      value: "other"
-  help_text: "Are you using another CMS as frontend for your site or using it alongside CKAN?"
+    - label: "Custom"
+      value: "custom"
+    - label: "Unknown"
+      value: "unknown"
+  help_text: "What frontend technology is used with your CKAN instance?"
 
 - field_name: other_frontend_cms
   label: Other Frontend CMS
   required: false
   help_text: "If you selected 'Other' for the frontend CMS, please specify which one you're using."
 
-
-
 - field_name: extensions
   label: Extensions
+  preset: multiple_text
+  form_placeholder: Extensions
   validators: ignore_missing
   help_text: "List any extensions you're using."
-
 
 - field_name: contact_email
   label: Maintainer Email
@@ -160,17 +188,56 @@ dataset_fields:
   form_placeholder: eg. economy, mental health, government
   
 - field_name: license_id
-  label: License ID
-  form_snippet: license.html
+  label: License
+  preset: select
+  validators: not_empty
+  choices:
+    - value: "notspecified"
+      label: "License Not Specified"
+    - value: "odc-pddl"
+      label: "Open Data Commons Public Domain Dedication and License (PDDL)"
+    - value: "odc-odbl"
+      label: "Open Data Commons Open Database License (ODbL)"
+    - value: "odc-by"
+      label: "Open Data Commons Attribution License"
+    - value: "cc-zero"
+      label: "Creative Commons CC Zero (CC0)"
+    - value: "cc-by"
+      label: "Creative Commons Attribution"
+    - value: "cc-by-sa"
+      label: "Creative Commons Attribution Share-Alike"
+    - value: "gfdl"
+      label: "GNU Free Documentation License"
+    - value: "other-open"
+      label: "Other (Open)"
+    - value: "other-pd"
+      label: "Other (Public Domain)"
+    - value: "other-at"
+      label: "Other (Attribution)"
+    - value: "uk-ogl"
+      label: "UK Open Government Licence"
+    - value: "cc-nc"
+      label: "Creative Commons Non-Commercial"
+    - value: "other-nc"
+      label: "Other (Non-Commercial)"
+    - value: "other-closed"
+      label: "Other (Not Open)"
+    - value: "custom"
+      label: "Custom License"
+  help_text: "The license under which the dataset is released"
+
+- field_name: custom_license
+  label: Custom License Details
   validators: ignore_missing
-  help_text: "The license ID under which the dataset is released"
-  
+  form_placeholder: "Enter details about your custom license"
+  help_text: "If you selected 'Custom License' above, please provide details here"
   
 - field_name: language
   label: Language
   preset: select
   validators: ignore_missing
   choices:
+    # European languages
     - label: "English"
       value: "en"
     - label: "French"
@@ -179,15 +246,220 @@ dataset_fields:
       value: "es"
     - label: "German"
       value: "de"
+    - label: "Italian"
+      value: "it"
+    - label: "Portuguese"
+      value: "pt"
+    - label: "Dutch"
+      value: "nl"
+    - label: "Swedish"
+      value: "sv"
+    - label: "Danish"
+      value: "da"
+    - label: "Finnish"
+      value: "fi"
+    - label: "Norwegian"
+      value: "no"
+    - label: "Polish"
+      value: "pl"
+    - label: "Czech"
+      value: "cs"
+    - label: "Slovak"
+      value: "sk"
+    - label: "Hungarian"
+      value: "hu"
+    - label: "Romanian"
+      value: "ro"
+    - label: "Bulgarian"
+      value: "bg"
+    - label: "Greek"
+      value: "el"
+    - label: "Latvian"
+      value: "lv"
+    - label: "Lithuanian"
+      value: "lt"
+    - label: "Estonian"
+      value: "et"
+    - label: "Slovenian"
+      value: "sl"
+    - label: "Croatian"
+      value: "hr"
+      
+    # Americas languages
+    - label: "Mexican Spanish"
+      value: "es-mx"
+    - label: "Argentinian Spanish"
+      value: "es-ar"
+    - label: "Chilean Spanish"
+      value: "es-cl"
+    - label: "Brazilian Portuguese"
+      value: "pt-br"
+    - label: "Canadian French"
+      value: "fr-ca"
+      
+    # Asian languages
+    - label: "Chinese"
+      value: "zh"
+    - label: "Japanese"
+      value: "ja"
+    - label: "Korean"
+      value: "ko"
+    - label: "Thai"
+      value: "th"
+    - label: "Vietnamese"
+      value: "vi"
+    - label: "Indonesian"
+      value: "id"
+    - label: "Malay"
+      value: "ms"
+    - label: "Hindi"
+      value: "hi"
+    - label: "Bengali"
+      value: "bn"
+    - label: "Urdu"
+      value: "ur"
+    - label: "Persian"
+      value: "fa"
+      
+    # Middle Eastern languages
+    - label: "Arabic"
+      value: "ar"
+    - label: "Hebrew"
+      value: "he"
+    - label: "Turkish"
+      value: "tr"
+      
+    # African languages
+    - label: "Swahili"
+      value: "sw"
+    - label: "Amharic"
+      value: "am"
+    - label: "Hausa"
+      value: "ha"
+    - label: "Yoruba"
+      value: "yo"
+    - label: "Zulu"
+      value: "zu"
+      
+    # For any other languages
     - label: "Other"
       value: "other"
-  help_text: "Primary language of the dataset"
-  
+  help_text: "Primary language of the Website"
+
 - field_name: other_language
   label: Other Language
   required: false
-  help_text: "If you selected 'Other' for language, please specify which language(s)"
-
+  preset: multiple_select
+  validators: ignore_missing
+  choices:
+    # European languages
+    - label: "English"
+      value: "en"
+    - label: "French"
+      value: "fr"
+    - label: "Spanish"
+      value: "es"
+    - label: "German"
+      value: "de"
+    - label: "Italian"
+      value: "it"
+    - label: "Portuguese"
+      value: "pt"
+    - label: "Dutch"
+      value: "nl"
+    - label: "Swedish"
+      value: "sv"
+    - label: "Danish"
+      value: "da"
+    - label: "Finnish"
+      value: "fi"
+    - label: "Norwegian"
+      value: "no"
+    - label: "Polish"
+      value: "pl"
+    - label: "Czech"
+      value: "cs"
+    - label: "Slovak"
+      value: "sk"
+    - label: "Hungarian"
+      value: "hu"
+    - label: "Romanian"
+      value: "ro"
+    - label: "Bulgarian"
+      value: "bg"
+    - label: "Greek"
+      value: "el"
+    - label: "Latvian"
+      value: "lv"
+    - label: "Lithuanian"
+      value: "lt"
+    - label: "Estonian"
+      value: "et"
+    - label: "Slovenian"
+      value: "sl"
+    - label: "Croatian"
+      value: "hr"
+      
+    # Americas languages
+    - label: "Mexican Spanish"
+      value: "es-mx"
+    - label: "Argentinian Spanish"
+      value: "es-ar"
+    - label: "Chilean Spanish"
+      value: "es-cl"
+    - label: "Brazilian Portuguese"
+      value: "pt-br"
+    - label: "Canadian French"
+      value: "fr-ca"
+      
+    # Asian languages
+    - label: "Chinese"
+      value: "zh"
+    - label: "Japanese"
+      value: "ja"
+    - label: "Korean"
+      value: "ko"
+    - label: "Thai"
+      value: "th"
+    - label: "Vietnamese"
+      value: "vi"
+    - label: "Indonesian"
+      value: "id"
+    - label: "Malay"
+      value: "ms"
+    - label: "Hindi"
+      value: "hi"
+    - label: "Bengali"
+      value: "bn"
+    - label: "Urdu"
+      value: "ur"
+    - label: "Persian"
+      value: "fa"
+      
+    # Middle Eastern languages
+    - label: "Arabic"
+      value: "ar"
+    - label: "Hebrew"
+      value: "he"
+    - label: "Turkish"
+      value: "tr"
+      
+    # African languages
+    - label: "Swahili"
+      value: "sw"
+    - label: "Amharic"
+      value: "am"
+    - label: "Hausa"
+      value: "ha"
+    - label: "Yoruba"
+      value: "yo"
+    - label: "Zulu"
+      value: "zu"
+      
+    # For any other languages
+    - label: "Other"
+      value: "other"
+  help_text: "Additional languages Supported"
 
 resource_fields:
 - field_name: url
