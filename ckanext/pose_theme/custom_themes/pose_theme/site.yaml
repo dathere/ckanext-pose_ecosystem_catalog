@@ -55,32 +55,20 @@ dataset_fields:
   choices:
     - label: "North America"
       value: "North America"
-    - label: "South America"
-      value: "South America"
-    - label: "Southern Africa"
-      value: "Southern Africa"
+    - label: "Latin America & Caribbean"
+      value: "Latin America & Caribbean"
+    - label: "Sub-Saharan Africa"
+      value: "Sub-Saharan Africa"
+    - label: "Global / Uncertain"
+      value: "Global / Uncertain"
     - label: "Europe"
       value: "Europe"
-    - label: "Southeast Asia"
-      value: "Southeast Asia"
-    - label: "East Asia"
-      value: "East Asia"
-    - label: "South Asia"
-      value: "South Asia"
-    - label: "North Africa"
-      value: "North Africa"
-    - label: "Middle East"
-      value: "Middle East"
-    - label: "Oceania"
-      value: "Oceania"
+    - label: "Asia-Pacific"
+      value: "Asia-Pacific"
+    - label: "North Africa & Middle East"
+      value: "North Africa & Middle East"
     - label: "Central Asia"
       value: "Central Asia"
-    - label: "Caribbean"
-      value: "Caribbean"
-    - label: "East Africa"
-      value: "East Africa"
-    - label: "Central America"
-      value: "Central America"
   help_text: "What region does your instance belong to?"
 
 - field_name: latitude
@@ -188,42 +176,9 @@ dataset_fields:
   
 - field_name: license_id
   label: License
-  preset: select
-  validators: not_empty
-  choices:
-    - value: "notspecified"
-      label: "License Not Specified"
-    - value: "odc-pddl"
-      label: "Open Data Commons Public Domain Dedication and License (PDDL)"
-    - value: "odc-odbl"
-      label: "Open Data Commons Open Database License (ODbL)"
-    - value: "odc-by"
-      label: "Open Data Commons Attribution License"
-    - value: "cc-zero"
-      label: "Creative Commons CC Zero (CC0)"
-    - value: "cc-by"
-      label: "Creative Commons Attribution"
-    - value: "cc-by-sa"
-      label: "Creative Commons Attribution Share-Alike"
-    - value: "gfdl"
-      label: "GNU Free Documentation License"
-    - value: "other-open"
-      label: "Other (Open)"
-    - value: "other-pd"
-      label: "Other (Public Domain)"
-    - value: "other-at"
-      label: "Other (Attribution)"
-    - value: "uk-ogl"
-      label: "UK Open Government Licence"
-    - value: "cc-nc"
-      label: "Creative Commons Non-Commercial"
-    - value: "other-nc"
-      label: "Other (Non-Commercial)"
-    - value: "other-closed"
-      label: "Other (Not Open)"
-    - value: "custom"
-      label: "Custom License"
-  help_text: "The license under which the dataset is released"
+  validators: ignore_missing
+  form_placeholder: "e.g. notspecified, odc-pddl, cc-by"
+  help_text: "The license(s) under which the dataset is released. Enter comma-separated license IDs from: notspecified, odc-pddl, odc-odbl, odc-by, cc-zero, cc-by, cc-by-sa, gfdl, other-open, other-pd, other-at, uk-ogl, cc-nc, other-nc, other-closed"
 
 - field_name: custom_license
   label: Custom License Details
@@ -335,16 +290,10 @@ dataset_fields:
   help_text: "Primary language of the Website"
 
 
-- field_name: topic_id
-  label: Topic ID
-  validators: ignore_missing
-  form_placeholder: Enter the topic ID
-  help_text: Unique identifier for the extensions topic
-
 - field_name: other_language
   label: Other Language
   required: false
-  preset: multiple_select
+  preset: multiple_checkbox
   validators: ignore_missing
   choices:
     # European languages
@@ -455,6 +404,12 @@ dataset_fields:
     - label: "Other"
       value: "other"
   help_text: "Additional languages Supported"
+
+- field_name: topic_id
+  label: Topic ID
+  validators: ignore_missing
+  form_placeholder: Enter the topic ID
+  help_text: Unique identifier for the extensions topic
 
 resource_fields:
 - field_name: url
