@@ -115,12 +115,6 @@ dataset_fields:
       value: "development"
   help_text: "The current status of your CKAN site."
 
-- field_name: publication_date
-  label: Publication Date
-  preset: date
-  validators: ignore_missing
-  help_text: "When did (or will) your CKAN site go live"
-
 # Technical Details
 - field_name: git_repo
   label: Git Repository
@@ -132,25 +126,6 @@ dataset_fields:
   label: CKAN Version
   required: true
   help_text: "The version of CKAN you are running."
-
-- field_name: frontend_cms
-  label: Frontend CMS
-  preset: select
-  validators: ignore_missing
-  choices:
-    - label: "CKAN Default"
-      value: "ckan_default"
-    - label: "PortalJS"
-      value: "portaljs"
-    - label: "Drupal"
-      value: "drupal"
-    - label: "WordPress"
-      value: "wordpress"
-    - label: "Custom"
-      value: "custom"
-    - label: "Not Specified"
-      value: "other"
-  help_text: "What frontend technology is used with your CKAN instance?"
 
 - field_name: extensions
   label: Extensions
@@ -275,11 +250,6 @@ dataset_fields:
   help_text: "Primary language of the Website"
 
 
-- field_name: other_language
-  label: Languages Available
-  required: false
-  validators: ignore_missing
-  help_text: "Additional languages Supported"
 
 - field_name: num_datasets
   label: Number of Datasets
