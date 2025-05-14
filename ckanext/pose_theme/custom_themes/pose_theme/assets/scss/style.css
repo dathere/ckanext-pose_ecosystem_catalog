@@ -1933,12 +1933,12 @@ nav.account.not-authed > ul > li > a > .dh-icon.login {
   z-index: -1;
   position: absolute;
 }
-.hero-area .widges.statsistics ul li.statdatasets .statistic_value, .hero-area .widges.statsistics ul li.statorg .statistic_value {
+.hero-area .widges.statsistics ul li.statdatasets a .statistic_value, .hero-area .widges.statsistics ul li.statorg a .statistic_value {
   font-size: 8rem;
   font-weight: 900;
   color: #ffffff;
 }
-.hero-area .widges.statsistics ul li.statdatasets .statistic_name, .hero-area .widges.statsistics ul li.statorg .statistic_name {
+.hero-area .widges.statsistics ul li.statdatasets a .statistic_name, .hero-area .widges.statsistics ul li.statorg a .statistic_name {
   font-size: 2rem;
   color: #e4e7ec;
   position: absolute;

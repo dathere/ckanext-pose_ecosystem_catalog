@@ -530,3 +530,16 @@ section.showcases .slick-showcase .slick-arrow:hover {
 section.showcases .slick-showcase .media-item {
   border: 1px solid #e4e7ec;
 }
+
+
+.dataset-thumbnail.me-3 .img-thumbnail {
+  width: 250px;
+  max-height: 100%;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+  position: relative;
+  z-index: 0;
+  border: 2px groove #6f6c7d14;
+}

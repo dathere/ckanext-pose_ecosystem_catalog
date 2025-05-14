@@ -58,15 +58,6 @@ class PoseShowcasePlugin(plugins.SingletonPlugin, lb.DefaultDatasetForm):
             return facets_dict
         return OrderedDict({"tags": _("Tags")})
 
-    # IPackageController
-    def before_dataset_search(self, search_params):
-
-        if tk.request and tk.request.path[0:8] == "/dataset":
-            search_params.update(
-                {"fq": "+dataset_type:dataset {}".format(search_params.get("fq"))}
-            )
-
-        return search_params
 
     # IActions
     def get_actions(self):

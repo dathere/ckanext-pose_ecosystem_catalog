@@ -7,7 +7,7 @@
 {% set detailed_info = h.markdown_extract(package.detailed_info, extract_length=180) %}
 
 {% set image_url = h.get_value_from_showcase_extras(package.extras, 'image_url') %}
-  {%if package.owner_org %}
+{%if package.owner_org %}
   {% set owner_url = h.url_for('organization' + '.read', id=package.owner_org ) %}
 {% endif %}
 
@@ -23,6 +23,16 @@
   <li class="dataset-item">
     {% block content %}
       <div class="dataset-content d-flex">
+        {# Thumbnail image block #}
+        {% if package.type == 'site' and image_url %}
+          {% block thumbnail %}
+            <div class="dataset-thumbnail me-3">
+              {% if image_url %}
+                <img src="{{ h.get_image_url(image_url) }}" alt="{{ package.title }}" class="img-thumbnail" >
+              {% endif %}
+            </div>
+          {% endblock %}
+        {% endif %}
 
         <div class="dataset-info flex-grow-1">
           {% block heading %}
@@ -34,7 +44,7 @@
               {% block heading_org %}
                 {% set org = h.get_organization(package.owner_org) %}
                 <a href="{{ owner_url }}"
-                    class="label"  style="font-size: 16px;"><p>{{ org.title or org.display_name }}</p></a>  </h3>
+                    class="label"  style="font-size: 16px;"><p>{{ org.title or org.display_name }}</p></a>
                 {% endblock %}
               {% endif %}
               {% block description %}
@@ -44,9 +54,9 @@
                 {% else %}
                   <div>{{ h.markdown_extract(package.notes, extract_length=180)|urlize }}</div>
                   {% endif %}
-                  {% else %}
+                {% else %}
                   <p class="empty">{{ h.humanize_entity_type('package', package.type, 'no description') or _("There is no description for this dataset") }}</p>
-                  {% endif %}
+                {% endif %}
               {% endblock %}
               {% block heading_meta %}
                 {% if package.get('state', '').startswith('draft') %}
@@ -55,6 +65,7 @@
                   <span class="label label-important">{{ _('Deleted') }}</span>
                 {% endif %}
               {% endblock %}
+            </h3>
           {% endblock %}
           
 
@@ -65,8 +76,17 @@
                 <ul class="dataset-resources list-unstyled">
                   {% block resources_inner %}
                     {% for resource in h.dict_list_reduce(package.resources, 'format') %}
-                    {% if package.type == 'application'%}
+                    {% if package.type == 'site'%}
                       <li>
+                        <a href=""
+                        class="label" data-bs-format="Site"
+                        style="color:white;">Site</a>
+                      </li>
+                      {% elif package.type == 'extension'%}
+                      <li>
+                        <a href=""
+                        class="label" data-bs-format="Extension"
+                        style="color:white;">Extension</a>
                       </li>
                       {% else %}
                       <li>

@@ -1,16 +1,198 @@
+
+
+
 {% extends "page.html" %}
 
 {% set pkg = pkg_dict or c.pkg_dict %}
 {% set name = pkg.title or pkg.name %}
-{%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
+{% set editor = h.get_showcase_wysiwyg_editor() %}
 {% set default_group_type = h.default_group_type('group') %}
-{% set site_search_route = 'site.search' %}
+
 
 
 {% block subtitle %}{{ pkg.title or pkg.name }} - {{ _('Sites') }}{% endblock %}
 {% set site_index_route = 'site_blueprint.index' if ckan_29_or_higher else 'site_index' %}
 {% set site_new_route = 'site_blueprint.new' if ckan_29_or_higher else 'site_new' %}
 
+{% block styles %}
+  {{ super() }}
+  {% set _type = 'asset' if h.ckan_version().split('.')[1] | int >= 9 else 'resource'  %}
+  {% snippet 'showcase/snippets/showcase_css_' ~ _type ~ '.html' %}
+  {% if editor == 'ckeditor' %}
+    {% snippet 'showcase/snippets/ckeditor_content_css_' ~ _type ~ '.html' %}
+  {% endif %}
+
+  {# Add custom CSS for the redesigned site page #}
+  <style>
+    /* Main grid layout */
+    .app-site-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    /* Header section with title and manage button */
+    .app-site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .app-site-title {
+      font-size: 2em;
+      margin: 0;
+    }
+  .app-site-manage .nav-item li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+    
+    /* Updated manage section styling */
+    .app-site-manage {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    /* Style for nav buttons in the manage section */
+    .app-site-manage .nav-item {
+      margin: 0;
+    }
+    
+    .app-site-manage .nav-item a {
+      padding: 6px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #f7f7f7;
+      color: #333;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: normal;
+    }
+  
+    .app-site-manage .nav-item a:hover {
+      background: #e7e7e7;
+      text-decoration: none;
+    }
+  
+    .app-site-manage .nav-item a i {
+      margin-right: 5px;
+    }
+    
+    /* Main content grid layout */
+    .app-site-content {
+      display: grid;
+      grid-template-columns: 2fr 2fr;
+      gap: 30px;
+    }
+    
+    
+    /* Content sections */
+    .app-site-section {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #fff;
+    }
+    
+    .app-site-section-title {
+      font-size: 1.2em;
+      margin-top: 0;
+      margin-bottom: 15px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    /* Application image container */
+    .app-site-image-container {
+      text-align: center;
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+    
+    .app-site-image {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    
+    /* Visit application button */
+    .app-site-visit-btn {
+      display: inline-block;
+      background-color: #2980b9;
+      color: white;
+      padding: 8px 15px;
+      text-decoration: none;
+      border-radius: 3px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    
+    .app-site-visit-btn:hover {
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+    }
+    
+    /* Organization section */
+    .app-site-organization {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .app-site-org-image {
+      width: 64px;
+      height: 64px;
+      margin-right: 15px;
+      object-fit: contain;
+    }
+    
+    /* Metadata items */
+    .app-site-metadata-item {
+      margin-bottom: 10px;
+    }
+    
+    .app-site-metadata-label {
+      font-weight: bold;
+    }
+    
+    /* Dataset list */
+    .app-site-datasets {
+      margin-top: 20px;
+    }
+    
+    .app-site-dataset-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .app-site-dataset-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    /* Responsive layout */
+    @media (max-width: 768px) {
+      .app-site-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+{% endblock %}
+
+{% set pkg = pkg_dict or c.pkg_dict %}
+{% set name = pkg.title or pkg.name %}
+{%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
+{% set default_group_type = h.default_group_type('group') %}
+{% set site_search_route = 'site.search' %}
 
 
 {% block links -%}
@@ -44,54 +226,85 @@
 {% endblock %}
 
 {% block primary_content_inner %}
-    <div class="actions">
-        {% if pkg.url %}
-            <a class="btn btn-primary ckanext-extension-launch" href="{{ pkg.url }}" target="_blank"><i class="fa fa-external-link icon-external-link"></i> {{ _('Visit') }}</a>
-        {% endif %}
-        {% if h.check_access('package_update', {'id':pkg.id }) %}
-            {% link_for _('Manage'), named_route=pkg.type+'.edit', id=pkg.name, package_type=pkg.type, class_='btn btn-default', icon='wrench' %}
-            {{ h.build_nav_icon(pkg.type ~ '.groups', h.humanize_entity_type('group', default_group_type, 'content tab') or _('Groups'), id=pkg.name, icon='users', class_='btn btn-default') }}
-        {% endif %}
-    </div>
-    {% block package_description %}
-        {% if pkg.private %}
-            <span class="dataset-private label label-inverse pull-right">
-                <i class="fa fa-lock icon-lock"></i>
-                {{ _('Private') }}
-            </span>
-        {% endif %}
-        <h1>
-            {% block page_heading %}
+    <div class="app-site-container">
+        <div class="app-site-header">
+            <h1 class="app-site-title">
                 {{ name }}
-                {% if pkg.state.startswith('draft') %}
-                    [{{ _('Draft') }}]
+                {% if pkg.private %}
+                    <span class="label label-inverse">
+                        <i class="fa fa-lock"></i>
+                        {{ _('Private') }}
+                    </span>
                 {% endif %}
-            {% endblock %}
-        </h1>
-        {% block package_notes %}
-        {% if pkg.notes %}
-          <div class="notes embedded-content ckanext-site-notes">
-            {{ h.render_markdown(pkg.notes) }}
-          </div>
-        {% endif %}
-      {% endblock %}
+                {% if pkg.state.startswith('draft') %}
+                    <span class="label label-info">[{{ _('Draft') }}]</span>
+                {% endif %}
+            </h1>
+            
+            {% if h.check_access('package_update', {'id':pkg.id }) %}
+                <div class="app-site-manage">
+                    <div class="nav-item">
+                        {{ h.build_nav_icon(dataset_type ~ '.groups', h.humanize_entity_type('group', default_group_type, 'content tab') or _('Groups'), id=pkg.name, icon='users') }}
+                    </div>
+                    {% link_for _('Manage'), named_route=pkg.type+'.edit', id=pkg.name, package_type=pkg.type, class_='btn btn-default', icon='wrench' %}
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="app-site-content">
+            <div class="app-site-main">
+                
+                <div class="app-site-section">
+                    <h2 class="app-site-section-title">{{ _('Description') }}</h2>
+                    {% if pkg.notes  %}
+                        <div class="app-site-description">
+                            {{ h.render_markdown(pkg.notes) }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+            </div>  
+              
+            <div class="app-site-sidebar">
+                <div class="app-site-image-container">
+                    {% if not image_url %}
+                        {% set image_url = pkg.resources[0].url if pkg.resources else None %}
+                    {% endif %}
+                    
+                    {% if image_url %}
+                        {% if pkg.url %}
+                            <a href="{{ pkg.url }}" target="_blank">
+                                <img src="{{ h.get_image_url(image_url) }}" alt="{{ name }}" class="app-site-image">
+                            </a>
+                        {% else %}
+                            <img src="{{ h.get_image_url(image_url) }}" alt="{{ name }}" class="app-site-image">
+                        {% endif %}
+                    {% endif %}
+                </div>
+                {% if pkg.tags %}
+                <div class="app-site-section">
+                    <h2 class="app-site-section-title">{{ _('Tags') }}</h2>
+                    <div class="app-site-tags">
+                        {% for tag in pkg.tags %}
+                            <a class="tag" href="{{ h.url_for(pkg.type + '.search', tags=tag.name) }}">{{ tag.display_name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
-    {% endblock %}
-
-    {% block package_tags %}
-        {% snippet "site/snippets/tags.html", type=pkg.type, tags=pkg.tags %}
-    {% endblock %}
-
-
-  {% block package_additional_info %}
-  {% snippet "scheming/package/snippets/additional_info.html",
-    pkg_dict=pkg, dataset_type=extesnion, schema=schema %}
-{% endblock %}
-    {% block package_search_results_list %}
-    {% endblock %}
-
+    <section class="additional-info">
+            {% block package_additional_info %}
+            {% snippet "scheming/package/snippets/additional_info.html",
+              pkg_dict=pkg, dataset_type=extesnion, schema=schema %}
+          {% endblock %}
+              {% block package_search_results_list %}
+              {% endblock %}
+    </section>
     {% block discourse_comments %}
-            {{ h.discourse_comments(pkg) }}
+        {{ h.discourse_comments(pkg) }}
     {% endblock %}
 
 {% endblock %}
@@ -107,4 +320,3 @@
         {% snippet "snippets/social.html" %}
     {% endblock %}
 {% endblock %}
-
