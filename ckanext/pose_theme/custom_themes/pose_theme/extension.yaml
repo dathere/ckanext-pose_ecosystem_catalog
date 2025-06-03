@@ -207,6 +207,21 @@ dataset_fields:
   label: License
   validators: ignore_missing
   help_text: License to control how others can use your code.
+  
+- field_name: discussions
+  label: GitHub Discussions Enabled
+  preset: select
+  validators: ignore_missing
+  choices:
+    - value: TRUE
+      label: Yes
+    - value: FALSE
+      label: No
+    - value: True
+      label: Yes
+    - value: False
+      label: No
+  help_text: Indicates whether the extension repository discussion tab is enabled 
 
 - field_name: topic_id
   label: Topic ID
