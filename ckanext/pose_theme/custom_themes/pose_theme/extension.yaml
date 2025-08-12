@@ -64,6 +64,12 @@ dataset_fields:
   form_placeholder: Enter the GitHub repository URL
   help_text: Link to the extension's GitHub repository
 
+- field_name: github_org
+  label: GitHub Organization
+  validators: ignore_missing
+  form_placeholder: Organization
+  help_text: Enter Organization's Name
+
 - field_name: extension_type
   label: Extension Type
   preset: select
@@ -105,10 +111,6 @@ dataset_fields:
     - value: TRUE
       label: Yes
     - value: FALSE
-      label: No
-    - value: True
-      label: Yes
-    - value: False
       label: No
   help_text: Indicates whether the extension repository is archived
 
