@@ -18,6 +18,12 @@ dataset_fields:
   label: Organization
   required: True
   preset: dataset_organization
+  
+- field_name: publisher
+  label: Publisher
+  validators: ignore_missing
+  form_placeholder: Publisher
+  help_text: Enter the name of the publisher organization
 
 - field_name: notes
   label: Description
@@ -32,11 +38,21 @@ dataset_fields:
 #   required: False
 #   help_text: Broad categories these data fall within. For data curation purposes, users should be a member of the category to add a dataset to the category.
 
+- field_name: is_featured
+  label: Is Featured
+  preset: select
+  validators: ignore_missing
+  choices:
+    - value: TRUE
+      label: Yes
+    - value: FALSE
+      label: No
+  help_text: Indicates whether the extension is marked as featured
+
 - field_name: tag_string
   label: Tags
   preset: tag_string_autocomplete
   form_placeholder: eg. economy, mental health, government
-
 
 - field_name: contact_name
   label: Maintainer Name
@@ -105,10 +121,6 @@ dataset_fields:
     - value: TRUE
       label: Yes
     - value: FALSE
-      label: No
-    - value: True
-      label: Yes
-    - value: False
       label: No
   help_text: Indicates whether the extension repository is archived
 
