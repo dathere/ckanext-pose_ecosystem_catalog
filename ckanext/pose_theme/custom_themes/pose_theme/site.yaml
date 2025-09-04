@@ -43,6 +43,17 @@ dataset_fields:
   required: true
   help_text: Tell us about your CKAN site, its purpose, and what kind of data it hosts.
 
+- field_name: is_featured
+  label: Is Featured
+  preset: select
+  validators: ignore_missing
+  choices:
+    - value: TRUE
+      label: Yes
+    - value: FALSE
+      label: No
+  help_text: Indicates whether the extension is marked as featured
+
 - field_name: location
   label: Location
   required: false
