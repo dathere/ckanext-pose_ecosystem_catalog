@@ -28,9 +28,8 @@ This extension includes the following CKAN plugins:
 To enable the plugins provided by this extension, add the following lines to your CKAN configuration file (e.g., `production.ini`):
 
 ```ini
-ckan.plugins = pose_theme pose_custom_css pose_custom_homepage pose_custom_header pose_custom_footer pose_custom_showcase pose_custom_extension pose_custom_site
-
-scheming.dataset_schemas = ckanext.pose_theme.pose_custom_showcase:showcase.yaml ckanext.pose_theme.pose_custom_extension:extension.yaml ckanext.pose_theme.pose_custom_site:site.yaml
+ckan.plugins = pose_theme pose_custom_css pose_custom_homepage pose_custom_header pose_custom_footer pose_custom_showcase
+scheming.dataset_schemas = ckanext.pose_theme.pose_custom_showcase:showcase.yaml ckanext.pose_theme.custom_themes.pose_theme:extension.yaml ckanext.pose_theme.custom_themes.pose_theme:site.yaml
 scheming.presets = ckanext.scheming:presets.json
 ```
 
