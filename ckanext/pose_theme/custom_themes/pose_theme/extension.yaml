@@ -38,17 +38,6 @@ dataset_fields:
 #   required: False
 #   help_text: Broad categories these data fall within. For data curation purposes, users should be a member of the category to add a dataset to the category.
 
-- field_name: is_featured
-  label: Is Featured
-  preset: select
-  validators: ignore_missing
-  choices:
-    - value: TRUE
-      label: Yes
-    - value: FALSE
-      label: No
-  help_text: Indicates whether the extension is marked as featured
-
 - field_name: tag_string
   label: Tags
   preset: tag_string_autocomplete
