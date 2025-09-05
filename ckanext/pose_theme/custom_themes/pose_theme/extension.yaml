@@ -220,6 +220,17 @@ dataset_fields:
   validators: ignore_missing
   help_text: License to control how others can use your code.
 
+- field_name: is_featured
+  label: Featured
+  preset: select
+  validators: ignore_missing
+  choices:
+    - value: TRUE
+      label: Yes
+    - value: FALSE
+      label: No
+  help_text: Indicates whether the extension is marked as featured
+
 - field_name: topic_id
   label: Topic ID
   validators: ignore_missing
