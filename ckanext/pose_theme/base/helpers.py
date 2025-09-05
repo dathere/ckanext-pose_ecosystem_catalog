@@ -112,25 +112,49 @@ def recent_datasets(num=6):
         return []
     return sorted_datasets[:num]
 
-def popular_extensions(num=6):
-    """Return a list of most popular extension datasets sorted by GitHub stars."""
-    popular_extensions_list = []
+def featured_extensions(num=6):
+    """Return featured extension datasets """
+    featured_extensions_list = []
     try:
         # Use package_search to filter for extensions and sort by stars (descending)
         search_result = toolkit.get_action('package_search')({}, {
             'q': 'type:extension',
-            'sort': 'stars desc',
+            'fq': 'extras_is_featured:TRUE',
             'rows': num,
             'start': 0
         })
         
         if search_result and 'results' in search_result:
-            popular_extensions_list = search_result['results']
-    except Exception:
-        logger.debug("[pose_theme] Error getting popular extensions")
+            featured_extensions_list = search_result['results']
+    except Exception as e:
+        logger.error(f"[pose_theme] Error getting popular extensions: {str(e)}", exc_info=True)
+        
         return []
+        
     
-    return popular_extensions_list[:num]
+    return featured_extensions_list[:num]
+
+def featured_sites(num=6):
+    """Return featured extension datasets """
+    featured_site_list = []
+    try:
+        # Use package_search to filter for extensions and sort by stars (descending)
+        search_result = toolkit.get_action('package_search')({}, {
+            'q': 'type:site',
+            'fq': 'extras_is_featured:TRUE',
+            'rows': num,
+            'start': 0
+        })
+        
+        if search_result and 'results' in search_result:
+            featured_site_list = search_result['results']
+    except Exception as e:
+        logger.error(f"[pose_theme] Error getting popular site: {str(e)}", exc_info=True)
+        
+        return []
+        
+    
+    return featured_site_list[:num]  
 
 def recent_extensions(num=6):
     """Return a list of recently updated/created extension datasets."""

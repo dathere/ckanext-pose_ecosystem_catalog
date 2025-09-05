@@ -1,0 +1,16 @@
+{% set popular_datasets = h.pose_theme_get_featured_extensions() %}
+<section class="main-browse section global-datasets popular-dataset">
+  <div class="module-content">
+    <div class="container">
+        <h4 class="heading-explanation above-heading">
+          Browse featured extensions below
+        </h4>
+        <h2 class="heading">
+          <a href="/dataset?sort=views_recent+desc">{{ h.pose_theme_get_custom_name('popular-datasets-custom-name', 'Featured Extensions') }}</a>
+        </h2>
+        <section id="recent-list" class="popular-ds">
+          {% snippet 'home/snippets/package_list.html', packages=popular_datasets %}
+        </section>
+      </div>
+    </div>
+</section>

@@ -56,6 +56,8 @@ class PoseThemeHomepagePlugin(MixinPlugin):
             'pose_theme_get_custom_name': helper.get_custom_name,
             'pose_theme_get_data': helper.get_data,
             'pose_theme_search_document_page_exists': helper.search_document_page_exists,
+            'pose_theme_get_featured_extensions': helper.featured_extensions,
+            'pose_theme_get_featured_sites': helper.featured_sites,
             'version': helper.version_builder,
             'is_activity_enabled': helper.is_activity_enabled,
         }

@@ -1,0 +1,19 @@
+{% set latest_datasets = h.pose_theme_get_featured_sites() %}
+<section class="main-browse section global-datasets recent-dataset">
+  <div class="module-content">
+    <div class="container">
+        <h4 class="heading-explanation above-heading">
+            Browse featured Sites below.
+        </h4>
+        <h2 class="heading">
+            <a href="/dataset">
+              Featured Sites
+            </a>
+      </h2>
+      <section id="recent-list" class="recent-ds">
+        {% snippet 'home/snippets/package_list.html', packages=latest_datasets,
+        note_type='updated' %}
+      </section>
+    </div>
+  </div>
+</section>
