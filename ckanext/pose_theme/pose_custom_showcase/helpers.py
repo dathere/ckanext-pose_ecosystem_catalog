@@ -56,7 +56,7 @@ def get_wysiwyg_editor():
     return tk.config.get("ckanext.showcase.editor", "")
 
 
-def get_recent_showcase_list(num=24):
+def get_recent_showcase_list(num=12):
     """Return a list of recent showcases."""
     showcases = []
     showcases = tk.get_action("ckanext_showcase_list")({}, {})

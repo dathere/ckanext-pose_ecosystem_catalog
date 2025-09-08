@@ -1,64 +1,59 @@
-{# Displays a single dataset of type 'showcase'. showcase - A showcase to
-display. item_class - The class name to use on the list item. truncate - The
-length to trucate the description to (default: 180) truncate_title - The length
-to truncate the title to (default: 85). show_remove - If True, show the remove
-button to remove showcase/dataset association. #}
+{# Displays a single dataset of type 'showcase'. showcase 
+- A showcase display. item_class 
+- The class name to use on the list item. truncate
+- The length to truncate the description to (default: 180) truncate_title
+- The length to truncate the title to (default: 85). show_remove 
+- If True, show the remove button to remove showcase/dataset association. #} 
 
-
-{% set truncate = truncate or 180 %}
+{% set truncate = truncate or 180 %} 
 {% set truncate_title = truncate_title or 80 %} 
 {% set title = showcase.title or showcase.name %} 
-{% set notes = h.markdown_extract(showcase.notes, extract_length=truncate) %}
-{% set ckan_29_or_higher = h.ckan_version().split('.')[1] | int >= 9 %}
-{% block showcase_item %}
+{% set notes = h.markdown_extract(showcase.notes, extract_length=truncate) %} 
+{% set showcase_read_route = 'site.read' %} 
+{% set image_url = h.get_value_from_showcase_extras(showcase.extras, 'image_url') %}
 
+{% if not image_url %}
+    {% set image_url = showcase.resources[0].url if showcase.resources else None %}
+{% endif %}
+{% block showcase_item %}
 <div class="media-item">
-  {% block item_inner %} {% block image %} {% set image_url =
-  h.get_value_from_showcase_extras(showcase.extras, 'image_url') %} {% if
-  image_url and not image_url.startswith('http') %}
-  <img
-    src="/uploads/showcase/{{ image_url }}"
-    alt="{{ showcase.title }}"
-    loading="lazy"
-    class="media-image img-fluid"
-  />
-  {% else %}
-  <img
-    src="{{ image_url or h.url_for_static('/base/images/placeholder-group.png') }}"
-    loading="lazy"
-    alt="{{ showcase.title }}"
-    class="media-image img-fluid"
-  />
-  {% endif %} {% endblock %} {% block title %}
-  <div class="media-content">
-    <!--h3>{{ showcase.title }}</h3>
-                <p>{{ notes }}</p-->
-  {% endblock %} 
-  
-  {% block link %} 
-  {% set redirect_link = h.get_value_from_showcase_extras(showcase.extras, 'redirect_link') %} 
-  {% if redirect_link and showcase.url %} 
-    {% set showcase_url = showcase.url %} 
-  {%else %} 
-    {% set showcase_url = h.url_for('showcase.read', id=showcase.name) %} 
-    
+  {% block item_inner %} 
+  <div class="media-image-container">
+  {% block image %} 
+  {% set redirect_link = h.get_value_from_showcase_extras(showcase.extras, 'redirect_link') %}
+  {% if redirect_link and showcase.url %}
+  {% set showcase_url = showcase.url %} 
+  {% else %} 
+  {% set showcase_url = h.url_for(showcase_read_route, id=showcase.name) %} 
   {% endif %}
-    <a
-      href="{{ showcase_url }}"
-      title="{{ _('View {showcase_title}').format(showcase_title=showcase.title) }}"
-      {%
-      if
-      redirect_link
-      %}target="_blank"
-      {%
-      endif
-      %}
-    >
-      <!--span>{{ _('View {showcase_title}').format(showcase_title=showcase.title) }}</span-->
-      <!--h4>New Jersey</h4-->
+  <a href="{{ showcase_url }}" title="{{ _('View {showcase_title}').format(showcase_title=showcase.title) }}"
+    {% if redirect_link %}target="_blank"{% endif %}>
+    {% if image_url and not image_url.startswith('http') %}
+    <img src="{{ h.get_image_url(image_url) }}" alt="{{ showcase.title }}" loading="lazy" class="media-image img-fluid"/>
+    {% else %}
+    <img src="{{ image_url or h.url_for_static('/base/images/placeholder-group.png') }}" loading="lazy" alt="{{ showcase.title }}" class="media-image img-fluid" />
+    {% endif %}
+  </a>
+  {% endblock %}
+  </div>
+  
+  {% block title %}
+  <div class="media-content">
+  {% endblock %} 
+    {% block link %} 
+    {% set redirect_link = h.get_value_from_showcase_extras(showcase.extras, 'redirect_link') %}
+    {% if redirect_link and showcase.url %}
+    {% set showcase_url = showcase.url %} 
+    {% else %} 
+    {% set showcase_url = h.url_for(showcase_read_route, id=showcase.name) %} 
+    {% endif %}
+    <a href="{{ showcase_url }}" title="{{ _('View {showcase_title}').format(showcase_title=showcase.title) }}"
+      {% if redirect_link %}target="_blank"{% endif %}>
       <h3>{{ showcase.title }}</h3>
     </a>
   </div>
-  {% endblock %} {% endblock %}
+
+  {% endblock %}
+  {% endblock %}
 </div>
 {% endblock %}

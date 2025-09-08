@@ -1,22 +1,19 @@
-<section class="main-featured section showcase bg-primary-light">
+<section class="main-featured section showcase">
   <div class="module-content">
     <div class="container">
         <div class="showcase-content">
           <h2 class="heading">
-            <a href="/showcase">
-              {{ h.pose_theme_get_custom_name('showcases-custom-name',
-              'Showcases') }}
-            </a>
+            Featured Sites
           </h2>
          
         </div>
 
         <section id="recent-list" class="showcases">
-          {% snippet 'showcase/snippets/showcase_list.html',
-          showcases=h.pose_theme_get_showcases() %}
+          {% snippet 'snippets/pose_showcase_list.html',
+          showcases=h.get_recent_showcase_list() %}
         </section>
         <div class="d-flex justify-content-center">
-          <a href="/showcase" class="btn btn-primary">View All Showcases</a>
+          <a href="/site" class="btn btn-primary">View All Sites</a>
         </div>
       </div>
     </div>

@@ -1,8 +1,10 @@
-{% block showcase_list %} {% if showcases %}
+{% block showcase_list %}
+{% if showcases %}
 <section class="variable slider slick-showcase">
-  {% block showcase_list_inner %} {% for showcase in showcases %} {% snippet
-  'snippets/pose_showcase_item.html', showcase=showcase,
-  list_class=list_class, item_class=item_class, truncate=truncate,
-  truncate_title=60 %} {% endfor %} {% endblock %}
+ {% block showcase_list_inner %}
+ {% for showcase in showcases %}
+  {% snippet 'snippets/pose_showcase_item.html', showcase=showcase, list_class=list_class, item_class=item_class, truncate=truncate, truncate_title=60 %}
+ {% endfor %} 
+{% endblock %}
 </section>
 {% endif %} {% endblock %}
