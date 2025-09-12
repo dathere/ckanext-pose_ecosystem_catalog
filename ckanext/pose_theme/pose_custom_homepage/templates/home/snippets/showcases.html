@@ -1,21 +1,39 @@
 <section class="main-featured section showcase">
   <div class="module-content">
     <div class="container">
-        <div class="showcase-content">
-          <h2 class="heading">
-            Featured Sites
-          </h2>
-         
-        </div>
-
-        <section id="recent-list" class="showcases">
-          {% snippet 'snippets/pose_showcase_list.html',
-          showcases=h.get_recent_showcase_list() %}
-        </section>
-        <div class="d-flex justify-content-center">
-          <a href="/dataset?q=type:site&extras_is_featured=TRUE&sort=views_recent+desc" class="btn btn-primary">View all Featured Sites</a>
-        </div>
+      <div class="showcase-content d-flex justify-content-between align-items-center">
+        <h2 class="heading">
+          Featured Sites
+        </h2>
+        <a href="/site" class="btn btn-link text-primary text-decoration-none view-all-btn">
+          View All Sites<span class="ml-1 arrow-icon">→</span>
+        </a>
       </div>
+      <section id="recent-list" class="showcases">
+        {% snippet 'snippets/pose_showcase_list.html',
+        showcases=h.get_recent_showcase_list() %}
+      </section>
     </div>
   </div>
 </section>
+
+<style>
+.view-all-btn {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.view-all-btn:hover {
+  color: #0056b3 !important;
+  text-decoration: none;
+  transform: translateX(2px);
+}
+
+.view-all-btn .arrow-icon {
+  transition: transform 0.3s ease;
+}
+
+.view-all-btn:hover .arrow-icon {
+  transform: translateX(3px);
+}
+</style>
