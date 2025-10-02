@@ -1,0 +1,55 @@
+{% extends "page.html" %}
+
+{% block primary_content %}
+<article class="module">
+  <div class="module-content" style="text-align: center; padding: 60px 40px;">
+
+    
+    <h1 class="page-heading" style="font-size: 32px; font-weight: 600; color: #111827; margin-bottom: 16px;">
+      Submission Received!
+    </h1>
+    
+    <p style="font-size: 18px; color: #6b7280; line-height: 1.6; max-width: 600px; margin: 0 auto 32px;">
+      Thank you for contributing to the CKAN ecosystem! We've received your submission and will review it shortly.
+    </p>
+    
+    <div style="margin-top: 40px;">
+      <a href="{{ h.url_for('home.index') }}" class="btn btn-primary" style="margin-right: 12px;">
+        <i class="fa fa-home"></i> Back to Home
+      </a>
+      <a href="{{ h.url_for('dataset.search') }}" class="btn btn-default">
+        <i class="fa fa-search"></i> Browse Catalog
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+
+{% block secondary_content %}
+<div class="module module-narrow module-shallow">
+  <h2 class="module-heading">
+    <i class="fa fa-clock inline-icon-left"></i>
+    {{ _('What Happens Next?') }}
+  </h2>
+  <div class="module-content">
+    <p style="margin-bottom: 12px;">
+      Our team will review your submission within 2-3 business days. We may contact you via email if we need additional information.
+    </p>
+    <p style="margin-bottom: 0;">
+      Once approved, your CKAN site or extension will be featured in our catalog for the community to discover!
+    </p>
+  </div>
+</div>
+
+<div class="module module-narrow module-shallow" style="margin-top: 20px;">
+  <h2 class="module-heading">
+    <i class="fa fa-info-circle inline-icon-left"></i>
+    {{ _('Questions?') }}
+  </h2>
+  <div class="module-content">
+    <p>
+    If you have any questions about your submission, feel free to reach out at <a href="mailto:abdurrahman@dathere.com">abdurrahman@dathere.com</a>.
+    </p>
+  </div>
+</div>
+{% endblock %}

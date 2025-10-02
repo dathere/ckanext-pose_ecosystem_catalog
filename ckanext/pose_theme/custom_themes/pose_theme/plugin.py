@@ -3,6 +3,7 @@ import ckan.plugins.toolkit as toolkit
 import ckanext.pose_theme.base.helpers as helper
 import ckanext.pose_theme.custom_themes.pose_theme.blueprint as view
 import ckanext.pose_theme.custom_themes.pose_theme.cli as cli
+from ckanext.pose_theme.routes import contact
 
 class PoseThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
@@ -11,27 +12,23 @@ class PoseThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IClick)
 
-
-        # IFacets
+    # IFacets
     def dataset_facets(self, facets_dict, package_type):
-        """Customize the facets displayed for datasets.
-        """
+        """Customize the facets displayed for datasets."""
         if package_type == "site":
             if facets_dict is None:
                 # Ensure facets_dict is a dictionary
                 facets_dict = {}
-
             # Remove the "license" facet if it exists
             if "license_id" in facets_dict:
                 del facets_dict["license_id"]
             # Remove the "format" facet if it exists
             if "res_format" in facets_dict:
                 del facets_dict["res_format"]
-
         # Return the modified facets dictionary
         return facets_dict
 
-    # IConfigurer   
+    # IConfigurer
     def update_config(self, ckan_config):
         toolkit.add_template_directory(ckan_config, 'templates')
         toolkit.add_public_directory(ckan_config, 'public')
@@ -41,13 +38,10 @@ class PoseThemePlugin(plugins.SingletonPlugin):
     def update_config_schema(self, schema):
         ignore_missing = toolkit.get_validator('ignore_missing')
         ignore_not_sysadmin = toolkit.get_validator('ignore_not_sysadmin')
-
         schema.update({
             # This is a custom configuration option
-            'contact_form_legend_content': [ignore_missing,
-                                            ignore_not_sysadmin]
+            'contact_form_legend_content': [ignore_missing, ignore_not_sysadmin]
         })
-
         return schema
 
     # ITemplateHelpers
@@ -65,4 +59,7 @@ class PoseThemePlugin(plugins.SingletonPlugin):
 
     # IBlueprint
     def get_blueprint(self):
-        return view.get_blueprints()
+        # Combine both blueprint lists
+        blueprints = view.get_blueprints()
+        blueprints.extend(contact.get_blueprints())
+        return blueprints

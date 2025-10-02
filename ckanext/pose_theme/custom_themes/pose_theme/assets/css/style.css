@@ -1124,6 +1124,10 @@ a.browse-group:hover .browse-group-link {
   background-color: #852c7b !important;
 }
 
+.global-datasets.add-to-catalog {
+  background-color: rgb(242, 244, 247);
+}
+
 .global-datasets.popular-dataset {
   background-color: rgb(242, 244, 247);
 }

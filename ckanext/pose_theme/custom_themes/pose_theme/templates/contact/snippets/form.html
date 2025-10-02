@@ -1,9 +1,168 @@
 {% ckan_extends %}
 
+{% block contact_form_heading %}
+
+{% endblock %}
+
 {% block contact_form_legend_content %}
-  {% if g.contact_form_legend_content %}
-    {{ h.render_markdown(g.contact_form_legend_content) }}
-  {% else %}
-    {{ _('Questions? Comments? We are always glad to hear from you!') }}
-  {% endif %}
+<div class="form-header" style="text-align: center; padding: 0 0 40px 0; margin-bottom: 40px; border-bottom: 1px solid #e5e7eb;">
+  <h1 style="font-size: 36px; font-weight: 600; color: #111827; margin: 0 0 16px 0; letter-spacing: -0.02em;">
+    Submit to Catalog
+  </h1>
+  <p style="font-size: 18px; color: #6b7280; line-height: 1.6; max-width: 650px; margin: 0 auto;">
+    Help grow the CKAN ecosystem! Submit your CKAN site or extension to be featured in our catalog.
+  </p>
+</div>
+{% endblock %}
+
+{% block contact_form_fields %}
+<div style="max-width: 650px; margin: 0 auto;">
+  
+  {# Submission Type - REQUIRED #}
+  <div class="form-group" style="margin-bottom: 32px;">
+    <label class="control-label" for="field-submission-type" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+      <span style="color: #ef4444; margin-right: 4px;">*</span>
+      I am submitting a
+    </label>
+    <div class="controls">
+      <select
+        id="field-submission-type"
+        name="submission_type"
+        class="form-control"
+        required
+        style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s; background-color: #fff;"
+      >
+        <option value="">Select type...</option>
+        <option value="site">🌐 CKAN Site</option>
+        <option value="extension">🔌 CKAN Extension</option>
+        <option value="both">✨ Both (Site and Extension)</option>
+      </select>
+    </div>
+  </div>
+
+  {# Email Field - REQUIRED #}
+  <div class="form-group" style="margin-bottom: 32px;">
+    <label class="control-label" for="field-email" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+      <span style="color: #ef4444; margin-right: 4px;">*</span>
+      Email Address
+    </label>
+    <input
+      type="email"
+      id="field-email"
+      name="email"
+      class="form-control"
+      placeholder="your.email@example.com"
+      required
+      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
+    />
+    <p style="font-size: 14px; color: #6b7280; margin: 10px 0 0 0; line-height: 1.5;">
+      We'll use this to contact you if we have questions
+    </p>
+  </div>
+
+  {# Project Name Field - REQUIRED #}
+  <div class="form-group" style="margin-bottom: 32px;">
+    <label class="control-label" for="field-project-name" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+      <span style="color: #ef4444; margin-right: 4px;">*</span>
+      Site/Extension Name
+    </label>
+    <input
+      type="text"
+      id="field-project-name"
+      name="project_name"
+      class="form-control"
+      placeholder="e.g., Open Data Portal or ckanext-contact"
+      required
+      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
+    />
+  </div>
+
+  {# URL Field - REQUIRED #}
+  <div class="form-group" style="margin-bottom: 32px;">
+    <label class="control-label" for="field-url" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+      <span style="color: #ef4444; margin-right: 4px;">*</span>
+      URL
+    </label>
+    <input
+      type="url"
+      id="field-url"
+      name="url"
+      class="form-control"
+      placeholder="https://example.com or https://github.com/user/extension"
+      required
+      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
+    />
+    <p style="font-size: 14px; color: #6b7280; margin: 10px 0 0 0; line-height: 1.5;">
+      <strong>For sites:</strong> your CKAN instance URL • <strong>For extensions:</strong> GitHub repository or documentation URL
+    </p>
+  </div>
+
+  {# Description Field - OPTIONAL #}
+  <div class="form-group" style="margin-bottom: 32px;">
+    <label class="control-label" for="field-content" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+      Description <span style="color: #9ca3af; font-weight: 400; font-size: 14px;">(Optional)</span>
+    </label>
+    <textarea
+      id="field-content"
+      name="content"
+      class="form-control"
+      placeholder="Provide a brief description of your CKAN site or extension. Include key features, use case, or any other relevant information..."
+      rows="6"
+      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s; resize: vertical; font-family: inherit; line-height: 1.6;"
+    ></textarea>
+    <p style="font-size: 14px; color: #6b7280; margin: 10px 0 0 0; line-height: 1.5;">
+      Help others understand what makes your submission unique
+    </p>
+  </div>
+
+  {# Name Field - OPTIONAL #}
+  <div class="form-group" style="margin-bottom: 32px;">
+    <label class="control-label" for="field-name" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+      Your Name <span style="color: #9ca3af; font-weight: 400; font-size: 14px;">(Optional)</span>
+    </label>
+    <input
+      type="text"
+      id="field-name"
+      name="name"
+      class="form-control"
+      placeholder="John Doe"
+      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
+    />
+  </div>
+
+  {# Organization Field - OPTIONAL #}
+  <div class="form-group" style="margin-bottom: 32px;">
+    <label class="control-label" for="field-organization" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+      Organization <span style="color: #9ca3af; font-weight: 400; font-size: 14px;">(Optional)</span>
+    </label>
+    <input
+      type="text"
+      id="field-organization"
+      name="organization"
+      class="form-control"
+      placeholder="Your organization or company name"
+      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
+    />
+  </div>
+
+  {# Category/Tags Field - OPTIONAL #}
+  <div class="form-group" style="margin-bottom: 40px;">
+    <label class="control-label" for="field-category" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+      Category/Tags <span style="color: #9ca3af; font-weight: 400; font-size: 14px;">(Optional)</span>
+    </label>
+    <input
+      type="text"
+      id="field-category"
+      name="category"
+      class="form-control"
+      placeholder="e.g., Government, Health, Contact Forms, Visualization"
+      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
+    />
+    <p style="font-size: 14px; color: #6b7280; margin: 10px 0 0 0; line-height: 1.5;">
+      Help us categorize your submission (comma-separated)
+    </p>
+  </div>
+
+</div>
+
 {% endblock %}

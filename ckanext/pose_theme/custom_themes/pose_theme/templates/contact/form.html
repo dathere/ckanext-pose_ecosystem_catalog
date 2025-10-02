@@ -1,0 +1,19 @@
+{% extends "page.html" %}
+
+{% block breadcrumb_content %}
+  {{ super() }}
+  <li class="active">{{ _('Submit to Catalog') }}</li>
+{% endblock %}
+
+{% block secondary %}
+{% endblock %}
+
+{% block primary %}
+<article class="module" style="max-width: 900px; margin: 0 auto;">
+  <div class="module-content" style="padding: 40px;">
+    {% block contact_form_content %}
+      {% include "contact/snippets/form.html" %}
+    {% endblock %}
+  </div>
+</article>
+{% endblock %}
