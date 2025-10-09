@@ -33,9 +33,8 @@
         style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s; background-color: #fff;"
       >
         <option value="">Select type...</option>
-        <option value="site">🌐 CKAN Site</option>
-        <option value="extension">🔌 CKAN Extension</option>
-        <option value="both">✨ Both (Site and Extension)</option>
+        <option value="site">CKAN Site</option>
+        <option value="extension">CKAN Extension</option>
       </select>
     </div>
   </div>
@@ -52,6 +51,7 @@
       name="email"
       class="form-control"
       placeholder="your.email@example.com"
+      value="{{ c.userobj.email if c.userobj else data.get('email', '') }}"
       required
       style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
     />
@@ -59,20 +59,18 @@
       We'll use this to contact you if we have questions
     </p>
   </div>
-
-  {# Project Name Field - REQUIRED #}
+  {# Name Field - OPTIONAL #}
   <div class="form-group" style="margin-bottom: 32px;">
-    <label class="control-label" for="field-project-name" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
-      <span style="color: #ef4444; margin-right: 4px;">*</span>
-      Site/Extension Name
+    <label class="control-label" for="field-name" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+      Your Name <span style="color: #9ca3af; font-weight: 400; font-size: 14px;">(Optional)</span>
     </label>
     <input
       type="text"
-      id="field-project-name"
-      name="project_name"
+      id="field-name"
+      name="name"
       class="form-control"
-      placeholder="e.g., Open Data Portal or ckanext-contact"
-      required
+      placeholder="John Doe"
+      value="{{ c.userobj.fullname if c.userobj else data.get('name', '') }}"
       style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
     />
   </div>
@@ -113,21 +111,6 @@
     <p style="font-size: 14px; color: #6b7280; margin: 10px 0 0 0; line-height: 1.5;">
       Help others understand what makes your submission unique
     </p>
-  </div>
-
-  {# Name Field - OPTIONAL #}
-  <div class="form-group" style="margin-bottom: 32px;">
-    <label class="control-label" for="field-name" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
-      Your Name <span style="color: #9ca3af; font-weight: 400; font-size: 14px;">(Optional)</span>
-    </label>
-    <input
-      type="text"
-      id="field-name"
-      name="name"
-      class="form-control"
-      placeholder="John Doe"
-      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
-    />
   </div>
 
   {# Organization Field - OPTIONAL #}
