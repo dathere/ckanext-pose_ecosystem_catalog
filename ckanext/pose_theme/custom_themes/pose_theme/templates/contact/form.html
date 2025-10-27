@@ -51,3 +51,24 @@
   </div>
 </article>
 {% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    // Refresh once when page is accessed (not on the refresh itself)
+    if (!performance.navigation || performance.navigation.type !== 1) {
+      // Not a refresh, so this is a new navigation - refresh once
+      if (!sessionStorage.getItem('contact_refreshed_' + Date.now().toString().slice(0, -4))) {
+        // Clear old keys
+        Object.keys(sessionStorage).forEach(key => {
+          if (key.startsWith('contact_refreshed_')) {
+            sessionStorage.removeItem(key);
+          }
+        });
+        // Set new timestamp-based key
+        sessionStorage.setItem('contact_refreshed_' + Date.now().toString().slice(0, -4), 'true');
+        window.location.reload();
+      }
+    }
+  </script>
+{% endblock %}
