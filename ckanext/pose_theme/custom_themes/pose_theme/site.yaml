@@ -20,6 +20,12 @@ dataset_fields:
   required: false
   preset: dataset_organization
 
+- field_name: publisher
+  label: Publisher
+  validators: ignore_missing
+  form_placeholder: Publisher
+  help_text: Enter the name of the publisher organization
+
 - field_name: url
   label: Site URL
   validators: url_validator ignore_missing
@@ -124,7 +130,7 @@ dataset_fields:
 
 - field_name: ckan_version
   label: CKAN Version
-  required: true
+  required: false
   help_text: "The version of CKAN you are running."
 
 - field_name: extensions
