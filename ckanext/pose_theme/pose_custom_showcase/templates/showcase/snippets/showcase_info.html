@@ -18,7 +18,7 @@
     
     #}
     {% set organization = organization or group%}
-    {% set org_alias = h.dathere_theme_organization_alias() %}
+    {% set org_alias = h.pose_theme_organization_alias() %}
     {% set url = h.url_for(organization.type + '.read', id=organization.name, ) %}
     {% set dataset_type = h.default_package_type() %}
     

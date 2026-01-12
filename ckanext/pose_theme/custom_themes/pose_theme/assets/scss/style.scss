@@ -1,4 +1,4 @@
-//datHere Ckan Theme
+//Pose CKAN Theme
 @import "_variables.scss";
 @import "modules/global";
 @import "modules/buttons";
@@ -189,7 +189,6 @@ nav.account.not-authed > ul > li > a {
 }
 
 .homepage .hero {
-  background: url("/img/dh-hero-bg.jpg") no-repeat center center;
   background-size: cover;
 }
 
