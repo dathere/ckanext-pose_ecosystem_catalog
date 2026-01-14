@@ -7,60 +7,67 @@ assignees: ''
 
 ---
 
-## Submit Your CKAN Extension
+##  Submit Your CKAN Extension
 
-Help grow the CKAN ecosystem! Submit your CKAN extension to be featured on the catalog.
+Help grow the CKAN ecosystem! Submit your CKAN extension to be featured in the catalog.
 
-**Please fill out the required fields marked with * to help us process your submission.**
+**Required fields are marked with `*`.**
 
 ---
 
 ### * Email Address
-<!-- We'll use this to contact you if we have questions -->
+> Used only to contact you if we have questions about your submission.
 
+---
 
 ### Your Name (Optional)
 
+---
 
 ### * Extension Name
-<!-- The name of your CKAN extension -->
+> The name of your CKAN extension.
 
+---
 
 ### * GitHub Repository URL
-<!-- Link to your extension's GitHub repository -->
+> Link to the public GitHub repository for your extension.
 
+---
 
 ### * Description
-<!-- Provide a brief description of your extension. Include key features, what problem it solves, and any other relevant information. -->
+> Provide a brief overview of your extension, including what it does and why it exists.
 
-**What does your extension do?**
+#### What does your extension do?
 
+#### What features does it provide?
 
-**What features does it provide?**
+#### What use cases does it address?
 
-
-**What use cases does it address?**
-
+---
 
 ### * CKAN Compatibility
-<!-- Which CKAN versions does your extension support? (Check all that apply) -->
+_Select all that apply_
 
 - [ ] CKAN 2.9
 - [ ] CKAN 2.10
 - [ ] CKAN 2.11
-- [ ] Other: 
+- [ ] Other:
+
+---
 
 ### Organization (Optional)
-<!-- Your organization or company name -->
+> Your organization, company, or affiliation (if applicable).
 
+---
 
-### Category/Tags (Optional)
-<!-- Help us categorize your extension (comma-separated) -->
-<!-- e.g., Visualization, Authentication, Data Validation, API, Harvest -->
+### Category / Tags (Optional)
+> Comma-separated keywords to help categorize your extension  
+> *(e.g., Visualization, Authentication, Data Validation, API, Harvest)*
 
+---
 
 ### Maintenance Status (Optional)
-<!-- What is the current maintenance status of this extension? -->
+_Select one_
 
 - [ ] Actively Maintained
 - [ ] Stable (occasional updates)
