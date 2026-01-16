@@ -7,10 +7,10 @@
 {% block contact_form_legend_content %}
 <div class="form-header" style="text-align: center; padding: 0 0 40px 0; margin-bottom: 40px; border-bottom: 1px solid #e5e7eb;">
   <h1 style="font-size: 36px; font-weight: 600; color: #111827; margin: 0 0 16px 0; letter-spacing: -0.02em;">
-    Submit to Catalog
+    Contact Us
   </h1>
   <p style="font-size: 18px; color: #6b7280; line-height: 1.6; max-width: 650px; margin: 0 auto;">
-    Help grow the CKAN ecosystem! Submit your CKAN site or extension to be featured in our catalog.
+    Have a question or feedback about the CKAN Ecosystem Catalog? We'd love to hear from you.
   </p>
 </div>
 {% endblock %}
@@ -18,28 +18,25 @@
 {% block contact_form_fields %}
 <div style="max-width: 650px; margin: 0 auto;">
   
-  {# Submission Type - REQUIRED #}
+  {# Name Field - REQUIRED but pre-filled for logged-in users #}
   <div class="form-group" style="margin-bottom: 32px;">
-    <label class="control-label" for="field-submission-type" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+    <label class="control-label" for="field-name" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
       <span style="color: #ef4444; margin-right: 4px;">*</span>
-      I am submitting a
+      Your Name
     </label>
-    <div class="controls">
-      <select
-        id="field-submission-type"
-        name="submission_type"
-        class="form-control"
-        required
-        style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s; background-color: #fff;"
-      >
-        <option value="">Select type...</option>
-        <option value="site">CKAN Site</option>
-        <option value="extension">CKAN Extension</option>
-      </select>
-    </div>
+    <input
+      type="text"
+      id="field-name"
+      name="name"
+      class="form-control"
+      placeholder="John Doe"
+      value="{{ c.userobj.fullname if c.userobj else data.get('name', '') }}"
+      required
+      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
+    />
   </div>
 
-  {# Email Field - REQUIRED #}
+  {# Email Field - REQUIRED but pre-filled for logged-in users #}
   <div class="form-group" style="margin-bottom: 32px;">
     <label class="control-label" for="field-email" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
       <span style="color: #ef4444; margin-right: 4px;">*</span>
@@ -56,60 +53,7 @@
       style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
     />
     <p style="font-size: 14px; color: #6b7280; margin: 10px 0 0 0; line-height: 1.5;">
-      We'll use this to contact you if we have questions
-    </p>
-  </div>
-  {# Name Field - OPTIONAL #}
-  <div class="form-group" style="margin-bottom: 32px;">
-    <label class="control-label" for="field-name" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
-      Your Name <span style="color: #9ca3af; font-weight: 400; font-size: 14px;">(Optional)</span>
-    </label>
-    <input
-      type="text"
-      id="field-name"
-      name="name"
-      class="form-control"
-      placeholder="John Doe"
-      value="{{ c.userobj.fullname if c.userobj else data.get('name', '') }}"
-      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
-    />
-  </div>
-
-  {# URL Field - REQUIRED #}
-  <div class="form-group" style="margin-bottom: 32px;">
-    <label class="control-label" for="field-url" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
-      <span style="color: #ef4444; margin-right: 4px;">*</span>
-      URL
-    </label>
-    <input
-      type="url"
-      id="field-url"
-      name="url"
-      class="form-control"
-      placeholder="https://example.com or https://github.com/user/extension"
-      required
-      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
-    />
-    <p style="font-size: 14px; color: #6b7280; margin: 10px 0 0 0; line-height: 1.5;">
-      <strong>For sites:</strong> your CKAN instance URL • <strong>For extensions:</strong> GitHub repository or documentation URL
-    </p>
-  </div>
-
-  {# Description Field - OPTIONAL #}
-  <div class="form-group" style="margin-bottom: 32px;">
-    <label class="control-label" for="field-content" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
-      Description <span style="color: #9ca3af; font-weight: 400; font-size: 14px;">(Optional)</span>
-    </label>
-    <textarea
-      id="field-content"
-      name="content"
-      class="form-control"
-      placeholder="Provide a brief description of your CKAN site or extension. Include key features, use case, or any other relevant information..."
-      rows="6"
-      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s; resize: vertical; font-family: inherit; line-height: 1.6;"
-    ></textarea>
-    <p style="font-size: 14px; color: #6b7280; margin: 10px 0 0 0; line-height: 1.5;">
-      Help others understand what makes your submission unique
+      We'll use this to respond to your inquiry
     </p>
   </div>
 
@@ -124,25 +68,73 @@
       name="organization"
       class="form-control"
       placeholder="Your organization or company name"
+      value="{{ data.get('organization', '') }}"
       style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
     />
   </div>
 
-  {# Category/Tags Field - OPTIONAL #}
+  {# Subject Field - REQUIRED #}
+  <div class="form-group" style="margin-bottom: 32px;">
+    <label class="control-label" for="field-subject" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+      <span style="color: #ef4444; margin-right: 4px;">*</span>
+      Subject
+    </label>
+    <div class="controls">
+      <select
+        id="field-subject"
+        name="subject"
+        class="form-control"
+        required
+        style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s; background-color: #fff;"
+      >
+        <option value="">Select a topic...</option>
+        <option value="general" {% if data.get('subject') == 'general' %}selected{% endif %}>General Inquiry</option>
+        <option value="submission" {% if data.get('subject') == 'submission' %}selected{% endif %}>Question About Submissions</option>
+        <option value="technical" {% if data.get('subject') == 'technical' %}selected{% endif %}>Technical Support</option>
+        <option value="feedback" {% if data.get('subject') == 'feedback' %}selected{% endif %}>Feedback or Suggestions</option>
+        <option value="report" {% if data.get('subject') == 'report' %}selected{% endif %}>Report an Issue</option>
+        <option value="partnership" {% if data.get('subject') == 'partnership' %}selected{% endif %}>Partnership Opportunity</option>
+        <option value="other" {% if data.get('subject') == 'other' %}selected{% endif %}>Other</option>
+      </select>
+    </div>
+  </div>
+
+  {# Message Field - REQUIRED #}
+  <div class="form-group" style="margin-bottom: 32px;">
+    <label class="control-label" for="field-content" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+      <span style="color: #ef4444; margin-right: 4px;">*</span>
+      Message
+    </label>
+    <textarea
+      id="field-content"
+      name="content"
+      class="form-control"
+      placeholder="Please provide details about your inquiry or feedback..."
+      rows="8"
+      required
+      style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s; resize: vertical; font-family: inherit; line-height: 1.6;"
+    >{{ data.get('content', '') }}</textarea>
+    <p style="font-size: 14px; color: #6b7280; margin: 10px 0 0 0; line-height: 1.5;">
+      Please be as detailed as possible to help us assist you better
+    </p>
+  </div>
+
+  {# URL/Reference Field - OPTIONAL #}
   <div class="form-group" style="margin-bottom: 40px;">
-    <label class="control-label" for="field-category" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
-      Category/Tags <span style="color: #9ca3af; font-weight: 400; font-size: 14px;">(Optional)</span>
+    <label class="control-label" for="field-url" style="display: block; font-weight: 500; font-size: 15px; color: #374151; margin-bottom: 10px;">
+      Related URL <span style="color: #9ca3af; font-weight: 400; font-size: 14px;">(Optional)</span>
     </label>
     <input
-      type="text"
-      id="field-category"
-      name="category"
+      type="url"
+      id="field-url"
+      name="url"
       class="form-control"
-      placeholder="e.g., Government, Health, Contact Forms, Visualization"
+      placeholder="https://example.com"
+      value="{{ data.get('url', '') }}"
       style="width: 100%; padding: 12px 14px; font-size: 16px; border: 1.5px solid #d1d5db; border-radius: 8px; transition: all 0.2s;"
     />
     <p style="font-size: 14px; color: #6b7280; margin: 10px 0 0 0; line-height: 1.5;">
-      Help us categorize your submission (comma-separated)
+      If your inquiry relates to a specific page, extension, or site, include the URL here
     </p>
   </div>
 

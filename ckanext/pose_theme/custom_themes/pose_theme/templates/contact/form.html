@@ -2,7 +2,7 @@
 
 {% block breadcrumb_content %}
   {{ super() }}
-  <li class="active">{{ _('Submit to Catalog') }}</li>
+  <li class="active">{{ _('Contact') }}</li>
 {% endblock %}
 
 {% block secondary %}
@@ -19,14 +19,12 @@
           <svg style="width: 64px; height: 64px; margin: 0 auto 24px; display: block; color: #6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
           </svg>
-          
           <h2 style="font-size: 24px; font-weight: 600; color: #111827; margin: 0 0 12px 0;">
             {{ _('Login Required') }}
           </h2>
           <p style="font-size: 16px; color: #6b7280; margin: 0 0 32px 0; line-height: 1.6;">
-            {{ _('You must be logged in to submit to our catalog. Please log in or create an account to continue.') }}
+            {{ _('You must be logged in to contact us. Please log in or create an account to continue.') }}
           </p>
-          
           <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
             <a href="{{ h.url_for('user.login', came_from=h.full_current_url()) }}" 
                class="btn btn-primary" 
@@ -47,7 +45,7 @@
         {% include "contact/snippets/form.html" %}
       {% endblock %}
     {% endif %}
-    
+
   </div>
 </article>
 {% endblock %}
@@ -63,10 +61,37 @@
       sessionStorage.setItem('contact_page_refreshed', 'true');
       window.location.reload();
     }
-    
     // Clear flag when leaving page so next visit triggers a refresh
     window.addEventListener('beforeunload', function() {
       sessionStorage.removeItem('contact_page_refreshed');
+    });
+
+    // Form validation and enhancement (only if form exists)
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('form');
+      if (!form) return; // Exit if no form (user not logged in)
+      
+      const subjectSelect = document.getElementById('field-subject');
+      const messageField = document.getElementById('field-content');
+      
+      // Add helpful placeholder text based on selected subject
+      if (subjectSelect && messageField) {
+        subjectSelect.addEventListener('change', function() {
+          const placeholders = {
+            'general': 'Please provide details about your inquiry...',
+            'submission': 'What would you like to know about submitting to the catalog?',
+            'technical': 'Please describe the technical issue you\'re experiencing, including any error messages...',
+            'feedback': 'We value your feedback! Please share your thoughts and suggestions...',
+            'report': 'Please describe the issue you\'d like to report with as much detail as possible...',
+            'partnership': 'Tell us about your partnership idea and how we might work together...',
+            'other': 'Please provide details about your inquiry...'
+          };
+          
+          if (this.value && placeholders[this.value]) {
+            messageField.placeholder = placeholders[this.value];
+          }
+        });
+      }
     });
   </script>
 {% endblock %}

@@ -17,11 +17,7 @@
 {% set org = h.get_organization(pkg_dict.owner_org) %} 
 {% block package_additional_info %}
 {% if h.check_access('package_update',{'id':pkg_dict.id}) %}
-<tr>
-  <th scope="row" class="dataset-label">{{ _("Organization") }}</th>
-  <td class="dataset-details">{{ org.title or org.display_name }}
-</td>
-</tr>
+
 {% endif %}
   {%- for field in schema.dataset_fields -%}
     {%- if field.field_name not in exclude_fields
